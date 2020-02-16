@@ -1,4 +1,4 @@
-package com.example.android.myapplication
+package com.example.android.common
 
 import org.junit.Test
 
