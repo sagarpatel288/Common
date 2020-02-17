@@ -1,4 +1,4 @@
-package com.example.android.ecommerce.listeners
+package com.example.android.common.baselisteners
 
 import android.content.Intent
 
