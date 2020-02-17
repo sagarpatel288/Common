@@ -1,4 +1,4 @@
-package com.example.android.demos.base
+package com.example.android.common.base
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.example.android.common.BR
+import com.example.android.common.base.BaseViewModel
 
 /**
  * 2/5/2020
