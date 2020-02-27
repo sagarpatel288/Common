@@ -1,4 +1,4 @@
-package com.example.android.common.base
+package com.example.android.common.baseapp
 
 import androidx.lifecycle.ViewModel
 import org.koin.core.KoinComponent

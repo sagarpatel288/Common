@@ -1,4 +1,4 @@
-package com.example.android.common.base
+package com.example.android.common.baseapp
 
 import android.app.Application
 import com.example.android.common.basedi.basedbmodules.baseDbModule
