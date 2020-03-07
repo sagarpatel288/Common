@@ -1,4 +1,4 @@
-package com.github.harmittaa.koinexample.networking
+package com.example.android.common.basemodels
 
 enum class Status {
     SUCCESS,

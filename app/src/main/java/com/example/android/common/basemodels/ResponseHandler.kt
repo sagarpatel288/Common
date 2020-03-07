@@ -1,7 +1,6 @@
-package com.github.harmittaa.koinexample.networking
+package com.example.android.common.basemodels
 
 import retrofit2.HttpException
-import java.lang.Exception
 import java.net.SocketTimeoutException
 
 enum class ErrorCodes(val code: Int) {
@@ -9,10 +8,39 @@ enum class ErrorCodes(val code: Int) {
 }
 
 open class ResponseHandler {
+
+    /**
+     * 3/7/2020
+     * [Resource] is a data class and [Resource.success] is a static method there.
+     * <p>
+     *
+     * </p>
+     *  {@link #} []
+     *
+     * @param
+     * @return
+     * @author srdpatel
+     * @see <a href="http://google.com"></a>
+     * [] (http://google.com "")
+     * @since 1.0
+     */
     fun <T : Any> handleSuccess(data: T): Resource<T> {
         return Resource.success(data)
     }
 
+    /**
+     * 3/7/2020
+     * [Resource] is a data class and [Resource.error] is a static method
+     * <p>
+     *
+     * </p>
+     *  {@link #} []
+     *
+     * @author srdpatel
+     * @see <a href="http://google.com"></a>
+     * [ReadableHyperlinkText]( "")
+     * @since 1.0
+     */
     fun <T : Any> handleException(e: Exception): Resource<T> {
         return when (e) {
             is HttpException -> Resource.error(getErrorMessage(e.code()), null)
@@ -20,6 +48,7 @@ open class ResponseHandler {
             else -> Resource.error(getErrorMessage(Int.MAX_VALUE), null)
         }
     }
+
 
     private fun getErrorMessage(code: Int): String {
         return when (code) {
