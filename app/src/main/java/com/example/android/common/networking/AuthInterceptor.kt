@@ -1,9 +1,10 @@
-package com.github.harmittaa.koinexample.networking
+package com.example.android.common.networking
 
-import com.github.harmittaa.koinexample.BuildConfig
+import com.example.android.common.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
+// comment by srdpatel: 3/7/2020 https://github.com/harmittaa/KoinExample/blob/master/app/src/main/java/com/github/harmittaa/koinexample/networking/AuthInterceptor.kt
 class AuthInterceptor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var req = chain.request()
