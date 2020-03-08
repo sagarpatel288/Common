@@ -15,7 +15,9 @@ import retrofit2.converter.gson.GsonConverterFactory
  * 3/8/2020
  *  []
  * <p>
- *
+ * This class has [getBaseApi] method that will use [com.example.android.common.baserest.BaseApi] interface.
+ * We want to provide a flexible way using which you can
+ * either change both baseUrl and apiInterface or only one of them at runtime using appropriate method.
  * </p>
  * @see <a href="https://github.com/harmittaa/KoinExample/blob/master/app/src/main/java/com/github/harmittaa/koinexample/networking/RetrofitClient.kt">harmittaa koin example</a>
  * [harmitta koin example](https://github.com/harmittaa/KoinExample/blob/master/app/src/main/java/com/github/harmittaa/koinexample/networking/RetrofitClient.kt "harmitta koin example")
@@ -40,7 +42,7 @@ val networkModule = module {
         getRetrofit(get())
     }
 
-    single {
+    factory {
         getBaseApi(get())
     }
 
@@ -57,11 +59,11 @@ val networkModule = module {
      * [Parameterized Injection](https://github.com/InsertKoinIO/koin/blob/master/koin-projects/docs/reference/koin-core/injection-parameters.md "Parameterized Injection")
      * @since 1.0
      */
-    single { (baseUrl: String, apiInterface: Class<*>) ->
+    factory { (baseUrl: String, apiInterface: Class<*>) ->
         getApi(baseUrl, get(), apiInterface)
     }
 
-    single { (apiInterface: Class<*>) ->
+    factory { (apiInterface: Class<*>) ->
         getApi(get(), apiInterface)
     }
 }
