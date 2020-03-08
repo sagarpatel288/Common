@@ -3,6 +3,7 @@ package com.example.android.common.basedi.networkmodules
 import android.util.Log
 import com.example.android.common.baseconstants.BASE_URL
 import com.example.android.common.baserest.BaseApi
+import com.example.android.common.networking.AuthInterceptor
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -10,36 +11,33 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-/*
- * Created by Birju Vachhani on 18 November 2019
- * Copyright © 2019 Login MVVM. All rights reserved.
+/**
+ * 3/8/2020
+ *  []
+ * <p>
+ *
+ * </p>
+ * @see <a href="https://github.com/harmittaa/KoinExample/blob/master/app/src/main/java/com/github/harmittaa/koinexample/networking/RetrofitClient.kt">harmittaa koin example</a>
+ * [harmitta koin example](https://github.com/harmittaa/KoinExample/blob/master/app/src/main/java/com/github/harmittaa/koinexample/networking/RetrofitClient.kt "harmitta koin example")
+ * @author srdpatel
+ * @since 1.0
  */
-
 val networkModule = module {
 
-    single {
-        HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-            override fun log(message: String) {
-                Log.e("SERVER", message)
-            }
-        }).apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
+    factory {
+        AuthInterceptor()
+    }
+
+    factory {
+        getHttpLoggingInterceptor()
+    }
+
+    factory {
+        getOkHttpClient(get(), get())
     }
 
     single {
-        OkHttpClient.Builder()
-            .addInterceptor(get<HttpLoggingInterceptor>())
-            .build()
-    }
-
-    single {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(get())
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().setPrettyPrinting().create()))
-            .build()
-            .create(BaseApi::class.java)
+        getRetrofit(get())
     }
 
     single {
@@ -60,12 +58,7 @@ val networkModule = module {
      * @since 1.0
      */
     single { (baseUrl: String, apiInterface: Class<*>) ->
-        Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .client(get())
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().setPrettyPrinting().create()))
-            .build()
-            .create(apiInterface)
+        getApi(baseUrl, get(), apiInterface)
     }
 
     single { (apiInterface: Class<*>) ->
@@ -76,3 +69,60 @@ val networkModule = module {
 fun getBaseApi(retrofit: Retrofit): BaseApi = retrofit.create(BaseApi::class.java)
 
 fun <T> getApi(retrofit: Retrofit, apiInterface: Class<T>): T = retrofit.create(apiInterface)
+
+fun getRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    return Retrofit.Builder()
+        .baseUrl(BASE_URL /*BuildConfig.API_URL*/)
+        .client(okHttpClient)
+        .addConverterFactory(
+            GsonConverterFactory.create(
+                GsonBuilder().setLenient().setPrettyPrinting().create()
+            )
+        )
+        .build()
+    /*return Retrofit.Builder().baseUrl(BuildConfig.API_URL).client(okHttpClient)
+        .addConverterFactory(GsonConverterFactory.create()).build()*/
+}
+
+fun <T> getApi(baseUrl: String, okHttpClient: OkHttpClient, apiInterface: Class<T>): T {
+    return Retrofit.Builder()
+        .baseUrl(baseUrl)
+        .client(okHttpClient)
+        .addConverterFactory(
+            GsonConverterFactory.create(
+                GsonBuilder().setLenient().setPrettyPrinting().create()
+            )
+        )
+        .build()
+        .create(apiInterface)
+}
+
+fun getOkHttpClient(
+    authInterceptor: AuthInterceptor,
+    loggingInterceptor: HttpLoggingInterceptor
+): OkHttpClient {
+    return OkHttpClient().newBuilder().addInterceptor(authInterceptor)
+        .addInterceptor(loggingInterceptor).build()
+}
+
+/**
+ * Inspired from:
+ * [BirjuVachhani login mvvm final code] (https://github.com/BirjuVachhani/login-mvvm-final-code/blob/master/app/src/main/java/com/example/loginmvvm/login/di/NetworkModule.kt)
+ * @see <a href="https://github.com/BirjuVachhani/login-mvvm-final-code/blob/master/app/src/main/java/com/example/loginmvvm/login/di/NetworkModule.kt">Birju Vachhani login mvvm final code</a>
+ * @author srdpatel
+ * @since 1.0
+ */
+fun getHttpLoggingInterceptor(): HttpLoggingInterceptor {
+    //Learn more about apply (kotlin-stdlib higher order functions): https://www.journaldev.com/19467/kotlin-let-run-also-apply-with
+    return HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+        override fun log(message: String) {
+            Log.e("SERVER", message)
+        }
+    }).apply {
+        level = HttpLoggingInterceptor.Level.BODY
+    }
+
+    /*val logger = HttpLoggingInterceptor()
+    logger.level = HttpLoggingInterceptor.Level.BASIC
+    return logger*/
+}
