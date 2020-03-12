@@ -1,4 +1,8 @@
 package com.example.android.common.baseviewholders
 
-class ViewHolderLoading {
+import android.view.View
+import androidx.recyclerview.widget.RecyclerView
+
+class ViewHolderLoading(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    
 }
