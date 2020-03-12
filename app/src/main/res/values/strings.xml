@@ -4,4 +4,6 @@
     <!--Placeholder text to check [CHAR LIMIT = 10, Single line]-->
     <string name="st_placeholder" translatable="false">placeholder</string>
     <string name="st_delete">Delete</string>
+    <string name="st_search">search</string>
+    <string name="st_apply">apply</string>
 </resources>
