@@ -28,15 +28,28 @@
  * THE SOFTWARE.
  */
 
-package com.raywenderlich.android.redditclone.networking
+package com.example.android.common.baserest
 
+import com.example.android.common.basemodels.RedditApiResponse
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface RedditService {
+interface ApiReddit {
+
+    /**
+     * 3/15/2020
+     * Better use suspend function [ApiOpenWeatherMap]
+     * <p>
+     *
+     * </p>
+     * @see <a href="https://www.raywenderlich.com/6948-paging-library-for-android-with-kotlin-creating-infinite-lists#toc-anchor-006">RayWenderLich</a>
+     * [RayWenderLich](https://www.raywenderlich.com/6948-paging-library-for-android-with-kotlin-creating-infinite-lists#toc-anchor-006 "RayWenderLich")
+     * @author srdpatel
+     * @since 1.0
+     */
   @GET("/r/aww/hot.json")
   fun getPosts(@Query("limit") loadSize: Int = 30,
                @Query("after") after: String? = null,
@@ -45,12 +58,12 @@ interface RedditService {
   companion object {
     private const val BASE_URL = "https://www.reddit.com/"
 
-    fun createService(): RedditService {
+    fun createService(): ApiReddit {
       return Retrofit.Builder()
           .baseUrl(BASE_URL)
           .addConverterFactory(GsonConverterFactory.create())
           .build()
-          .create(RedditService::class.java)
+          .create(ApiReddit::class.java)
     }
   }
 }

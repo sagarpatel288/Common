@@ -28,10 +28,10 @@
  * THE SOFTWARE.
  */
 
-package com.raywenderlich.android.redditclone.networking
+package com.example.android.common.basemodels
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity

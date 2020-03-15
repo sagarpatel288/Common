@@ -28,6 +28,6 @@
  * THE SOFTWARE.
  */
 
-package com.raywenderlich.android.redditclone.networking
+package com.example.android.common.basemodels
 
 class RedditApiResponse(val data: RedditListing)

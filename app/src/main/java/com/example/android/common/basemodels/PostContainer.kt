@@ -28,6 +28,8 @@
  * THE SOFTWARE.
  */
 
-package com.raywenderlich.android.redditclone.networking
+package com.example.android.common.basemodels
+
+import com.example.android.common.basemodels.RedditPost
 
 class PostContainer(val data: RedditPost)
