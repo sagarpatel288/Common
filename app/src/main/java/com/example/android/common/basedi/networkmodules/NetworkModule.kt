@@ -1,8 +1,8 @@
 package com.example.android.common.basedi.networkmodules
 
 import android.util.Log
-import com.example.android.common.baseconstants.BASE_URL
-import com.example.android.common.baserest.BaseApi
+import com.example.android.common.baseconstants.BASE_URL_GITHUB
+import com.example.android.common.baserest.ApiOpenWeatherMap
 import com.example.android.common.networking.AuthInterceptor
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * 3/8/2020
  *  []
  * <p>
- * This class has [getBaseApi] method that will use [com.example.android.common.baserest.BaseApi] interface.
+ * This class has [getBaseApi] method that will use [com.example.android.common.baserest.ApiOpenWeatherMap] interface.
  * We want to provide a flexible way using which you can
  * either change both baseUrl and apiInterface or only one of them at runtime using appropriate method.
  * </p>
@@ -68,13 +68,13 @@ val networkModule = module {
     }
 }
 
-fun getBaseApi(retrofit: Retrofit): BaseApi = retrofit.create(BaseApi::class.java)
+fun getBaseApi(retrofit: Retrofit): ApiOpenWeatherMap = retrofit.create(ApiOpenWeatherMap::class.java)
 
 fun <T> getApi(retrofit: Retrofit, apiInterface: Class<T>): T = retrofit.create(apiInterface)
 
 fun getRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
-        .baseUrl(BASE_URL /*BuildConfig.API_URL*/)
+        .baseUrl(BASE_URL_GITHUB /*BuildConfig.API_URL*/)
         .client(okHttpClient)
         .addConverterFactory(
             GsonConverterFactory.create(

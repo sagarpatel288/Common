@@ -1,7 +1,7 @@
 package com.example.android.common.baserest
 
 import com.example.android.common.BuildConfig
-import com.example.android.common.baseconstants.BASE_URL
+import com.example.android.common.baseconstants.BASE_URL_GITHUB
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -27,7 +27,7 @@ class ServiceGenerator {
     // comment by srdpatel: 2/29/2020 companion object acts like a static methods but it can be only inside the class
     companion object {
 
-        var baseUrl: String = BASE_URL
+        var baseUrl: String = BASE_URL_GITHUB
         private var retrofitBuilder =
             Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())

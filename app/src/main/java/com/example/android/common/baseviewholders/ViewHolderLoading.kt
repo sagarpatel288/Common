@@ -4,5 +4,5 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 class ViewHolderLoading(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    
+
 }
