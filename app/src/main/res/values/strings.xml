@@ -1,9 +1,24 @@
 <resources>
     <!--Placeholder text to check [Not Translatable. A Symbol.]-->
-    <string name="st_placeholder_short" translatable="false">-</string>
+    <string name="com_st_placeholder_short" translatable="false">-</string>
     <!--Placeholder text to check [CHAR LIMIT = 10, Single line]-->
-    <string name="st_placeholder" translatable="false">placeholder</string>
-    <string name="st_delete">Delete</string>
-    <string name="st_search">search</string>
-    <string name="st_apply">apply</string>
+    <string name="com_st_placeholder" translatable="false">placeholder</string>
+    <string name="com_st_delete">Delete</string>
+    <string name="com_st_search">search</string>
+    <string name="com_st_apply">apply</string>
+    <string name="com_st_category">category</string>
+    <string name="com_st_name">Name</string>
+    <string name="com_st_full_name">Full Name</string>
+    <string name="com_st_first_name">First Name</string>
+    <string name="com_st_middle_name">Middle Name</string>
+    <string name="com_st_last_name">Last Name</string>
+    <string name="com_st_minimum_order">Minimum Order</string>
+    <string name="com_st_remaining">Remaining</string>
+    <string name="com_st_unit">Unit</string>
+    <string name="com_st_price">Price</string>
+    <string name="com_st_edit">Edit</string>
+    <string name="com_st_save">Save</string>
+    <string name="com_st_status">Status</string>
+    <string name="com_st_enable">Enable</string>
+    <string name="com_st_disable">Disable</string>
 </resources>

@@ -6,6 +6,7 @@
     <!--Color for TextView-->
     <color name="comColorBlack">#000000</color>
     <color name="comColorPressedBlack">#80000000</color>
+    <color name="comColorTransBlack">#80000000</color>
     <!--Color for Product list item imageview border-->
     <color name="comColorTranslucentStatusbar">#649c7c7c</color>
     <color name="comColorTransparent">#00000000</color>
