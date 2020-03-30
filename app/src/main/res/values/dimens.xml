@@ -41,6 +41,9 @@
 
     <dimen name="dim_zero">0dp</dimen>
     <!--View space-->
+    <dimen name="dim_view_space_1">1dp</dimen>
+    <dimen name="dim_view_space_2">2dp</dimen>
+    <dimen name="dim_view_space_4">4dp</dimen>
     <dimen name="dim_view_space_8">8dp</dimen>
     <!--View space align to right end menu icon of toolbar-->
     <dimen name="dim_view_space_10">10dp</dimen>
@@ -56,7 +59,8 @@
     <dimen name="dim_view_space_28">28dp</dimen>
     <!--View space throughout app-->
     <dimen name="dim_app_space">@dimen/dim_view_space_10</dimen>
-
+    <dimen name="dim_app_space_small">@dimen/dim_view_space_4</dimen>
+    <dimen name="dim_app_space_large">@dimen/view_space_18</dimen>
     <!--Image width for product list item-->
     <dimen name="dim_width_image_in_list">70dp</dimen>
     <!--Image height for product list item-->
@@ -65,7 +69,7 @@
     <!--Title (Heading 1, Product Name, Price, Supplier etc...)-->
     <dimen name="dim_tv_title">18sp</dimen>
     <!--Subtitle (Heading 2, Product Price, name value, supplier phone number etc...)-->
-    <dimen name="dim_tv_subtitle">14sp</dimen>
+    <dimen name="dim_tv_subtitle">16sp</dimen>
     <!--Smallest possible text view size-->
     <dimen name="dim_tv_12">12sp</dimen>
 

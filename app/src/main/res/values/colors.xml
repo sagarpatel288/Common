@@ -10,6 +10,9 @@
     <!--Color for Product list item imageview border-->
     <color name="comColorTranslucentStatusbar">#649c7c7c</color>
     <color name="comColorTransparent">#00000000</color>
+
+    <color name="comColorGreen">#FF99CC00</color>
+
     <!-- Darker variant for the status bar and contextual app bars -->
     <color name="comColorPrimaryDark">@color/comColorAccent</color>
     <!-- Accent color for UI controls like checkboxes and text fields -->
