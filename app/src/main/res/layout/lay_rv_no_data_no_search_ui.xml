@@ -58,7 +58,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/dim_view_space_28"
+            android:layout_marginTop="@dimen/com_dim_view_space_28"
             >
 
             <include android:id="@+id/include_no_search"

@@ -31,7 +31,7 @@
 
     <!--TextView Title (Heading 1) Style-->
     <style name="TvTitle">
-        <item name="android:textSize">@dimen/dim_tv_title</item>
+        <item name="android:textSize">@dimen/com_dim_tv_title</item>
         <item name="android:textColor">@color/comColorBlack</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -48,7 +48,7 @@
 
     <!--TextView Subtitle (Heading 2) Style-->
     <style name="TvSubtitle" parent="TvTitle">
-        <item name="android:textSize">@dimen/dim_tv_subtitle</item>
+        <item name="android:textSize">@dimen/com_dim_tv_subtitle</item>
         <item name="android:textStyle">normal</item>
     </style>
 
