@@ -65,7 +65,8 @@
     <dimen name="com_dim_width_image_in_list">70dp</dimen>
     <!--Image height for product list item-->
     <dimen name="com_dim_height_image_in_list">70dp</dimen>
-
+    <dimen name="com_dim_height_image_nav_drawer">100dp</dimen>
+    <dimen name="com_dim_width_image_nav_drawer">100dp</dimen>
     <!--Title (Heading 1, Product Name, Price, Supplier etc...)-->
     <dimen name="com_dim_tv_title">18sp</dimen>
     <!--Subtitle (Heading 2, Product Price, name value, supplier phone number etc...)-->
