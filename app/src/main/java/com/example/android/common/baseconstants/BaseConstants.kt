@@ -37,6 +37,7 @@ const val MOBILE_NUMBER: String = "mobile_number"
 const val USER_ID: String = "user_id"
 const val LOGIN_ID: String = "login_id"
 const val LOGIN_TOKEN: String = "login_token"
+const val HAS_LOGGED_IN = "has_logged_in"
 
 class StaticConstants {
     companion object {

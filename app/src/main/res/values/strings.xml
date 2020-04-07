@@ -4,6 +4,8 @@
     <!--Placeholder text to check [CHAR LIMIT = 10, Single line]-->
     <string name="com_st_placeholder" translatable="false">placeholder</string>
     <string name="com_st_placeholder_long" translatable="false">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="com_st_log_in">Login</string>
+    <string name="com_st_sign_up">Sign Up</string>
     <string name="com_st_delete">Delete</string>
     <string name="com_st_search">search</string>
     <string name="com_st_apply">apply</string>
@@ -14,6 +16,10 @@
     <string name="com_st_first_name">First Name</string>
     <string name="com_st_middle_name">Middle Name</string>
     <string name="com_st_last_name">Last Name</string>
+    <string name="com_st_email">Email</string>
+    <string name="com_st_mobile">Mobile</string>
+    <string name="com_st_country_code">Country Code</string>
+    <string name="com_st_password">password</string>
     <string name="com_st_minimum_order">Minimum Order</string>
     <string name="com_st_remaining">Remaining</string>
     <string name="com_st_unit">Unit</string>

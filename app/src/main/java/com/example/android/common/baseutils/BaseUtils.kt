@@ -1,7 +1,9 @@
 package com.example.android.common.baseutils
 
+import android.content.SharedPreferences
 import androidx.sqlite.db.SimpleSQLiteQuery
 import androidx.sqlite.db.SupportSQLiteQuery
+import com.example.android.common.baseconstants.HAS_LOGGED_IN
 import com.example.android.common.basedb.basedao.CategoryDao
 import com.example.android.common.basedb.basedao.ProductDao
 import com.example.android.ecommerce.model.Product
@@ -76,6 +78,11 @@ class BaseUtils {
         @JvmStatic
         fun <T> getListTypeToken(classOfObject: Class<T>): Type {
             return TypeToken.getParameterized(ArrayList::class.java, classOfObject).type
+        }
+
+        @JvmStatic
+        fun hasLoggedIn(sharedPrefs: SharedPreferences): Boolean{
+            return sharedPrefs.getString(HAS_LOGGED_IN, "").toString().isNotEmpty()
         }
     }
 }
