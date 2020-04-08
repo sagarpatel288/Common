@@ -13,5 +13,14 @@ interface DispatcherProvider {
     fun unconfined(): CoroutineDispatcher = Dispatchers.Unconfined
 }
 
-// comment by srdpatel: 4/8/2020 Will be used as delegated SR class to provide thread
+/**
+ * 4/8/2020
+ * comment by srdpatel: 4/8/2020 Will be used as delegated SR class to provide thread
+ * Delegated and SR classes are useful while writing Tests through mocking it
+ * <p>
+ *
+ * </p>
+ * @author srdpatel
+ * @since 1.0
+ */
 class DefaultDispatcherProvider : DispatcherProvider
