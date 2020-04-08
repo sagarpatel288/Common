@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import androidx.sqlite.db.SimpleSQLiteQuery
 import androidx.sqlite.db.SupportSQLiteQuery
 import com.example.android.common.baseconstants.HAS_LOGGED_IN
+import com.example.android.common.baseconstants.StaticConstants
 import com.example.android.common.basedb.basedao.CategoryDao
 import com.example.android.common.basedb.basedao.ProductDao
 import com.example.android.ecommerce.model.Product
@@ -81,8 +82,13 @@ class BaseUtils {
         }
 
         @JvmStatic
-        fun hasLoggedIn(sharedPrefs: SharedPreferences): Boolean{
+        fun hasLoggedIn(sharedPrefs: SharedPreferences): Boolean {
             return sharedPrefs.getString(HAS_LOGGED_IN, "").toString().isNotEmpty()
+        }
+
+        @JvmStatic
+        fun setBaseApiUrl(baseUrl: String) {
+            StaticConstants.baseApiUrl = baseUrl
         }
     }
 }

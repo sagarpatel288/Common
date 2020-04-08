@@ -1,7 +1,7 @@
 package com.example.android.common.basedi.networkmodules
 
 import android.util.Log
-import com.example.android.common.baseconstants.BASE_URL_GITHUB
+import com.example.android.common.baseconstants.StaticConstants
 import com.example.android.common.baserest.ApiOpenWeatherMap
 import com.example.android.common.networking.AuthInterceptor
 import com.google.gson.GsonBuilder
@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * 3/8/2020
  *  []
  * <p>
- * This class has [getBaseApi] method that will use [com.example.android.common.baserest.ApiOpenWeatherMap] interface.
+ * This class has [getApiService] method that will use [com.example.android.common.baserest.ApiOpenWeatherMap] interface.
  * We want to provide a flexible way using which you can
  * either change both baseUrl and apiInterface or only one of them at runtime using appropriate method.
  * </p>
@@ -26,15 +26,15 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 val networkModule = module {
 
-    factory {
+    single {
         AuthInterceptor()
     }
 
-    factory {
+    single {
         getHttpLoggingInterceptor()
     }
 
-    factory {
+    single {
         getOkHttpClient(get(), get())
     }
 
@@ -42,8 +42,8 @@ val networkModule = module {
         getRetrofit(get())
     }
 
-    factory {
-        getBaseApi(get())
+    single {
+        getApiService(get())
     }
 
     /**
@@ -59,22 +59,22 @@ val networkModule = module {
      * [Parameterized Injection](https://github.com/InsertKoinIO/koin/blob/master/koin-projects/docs/reference/koin-core/injection-parameters.md "Parameterized Injection")
      * @since 1.0
      */
-    factory { (baseUrl: String, apiInterface: Class<*>) ->
-        getApi(baseUrl, get(), apiInterface)
+    single { (baseUrl: String, apiInterface: Class<*>) ->
+        getApiService(baseUrl, get(), apiInterface)
     }
 
-    factory { (apiInterface: Class<*>) ->
-        getApi(get(), apiInterface)
+    single { (apiInterface: Class<*>) ->
+        getApiService(get(), apiInterface)
     }
 }
 
-fun getBaseApi(retrofit: Retrofit): ApiOpenWeatherMap = retrofit.create(ApiOpenWeatherMap::class.java)
+fun getApiService(retrofit: Retrofit): ApiOpenWeatherMap = retrofit.create(ApiOpenWeatherMap::class.java)
 
-fun <T> getApi(retrofit: Retrofit, apiInterface: Class<T>): T = retrofit.create(apiInterface)
+fun <T> getApiService(retrofit: Retrofit, apiInterface: Class<T>): T = retrofit.create(apiInterface)
 
 fun getRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
-        .baseUrl(BASE_URL_GITHUB /*BuildConfig.API_URL*/)
+        .baseUrl(StaticConstants.baseApiUrl/*BuildConfig.API_URL*/)
         .client(okHttpClient)
         .addConverterFactory(
             GsonConverterFactory.create(
@@ -86,7 +86,7 @@ fun getRetrofit(okHttpClient: OkHttpClient): Retrofit {
         .addConverterFactory(GsonConverterFactory.create()).build()*/
 }
 
-fun <T> getApi(baseUrl: String, okHttpClient: OkHttpClient, apiInterface: Class<T>): T {
+fun <T> getApiService(baseUrl: String, okHttpClient: OkHttpClient, apiInterface: Class<T>): T {
     return Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(okHttpClient)
@@ -98,6 +98,7 @@ fun <T> getApi(baseUrl: String, okHttpClient: OkHttpClient, apiInterface: Class<
         .build()
         .create(apiInterface)
 }
+
 
 fun getOkHttpClient(
     authInterceptor: AuthInterceptor,

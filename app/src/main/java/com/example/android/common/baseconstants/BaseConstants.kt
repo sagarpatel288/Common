@@ -1,3 +1,5 @@
+@file:JvmName("BaseConstants")
+
 package com.example.android.common.baseconstants
 
 
@@ -9,9 +11,10 @@ package com.example.android.common.baseconstants
  * @author srdpatel
  * @since 1.0
  */
-const val BASE_URL_GITHUB: String = "https://api.github.com/";
-const val BASE_URL_REDDIT: String = "https://www.reddit.com/";
-const val BASE_URL_OPEN_WEATHER_MAP: String = "https://api.openweathermap.org/data/2.5/";
+const val BASE_URL_GITHUB: String = "https://api.github.com/"
+const val BASE_URL_REDDIT: String = "https://www.reddit.com/"
+const val BASE_URL_OPEN_WEATHER_MAP: String = "https://api.openweathermap.org/data/2.5/"
+const val BASE_URL_STACKEXCHANGE: String = "https://api.stackexchange.com/2.2/"
 const val PARCEL: String = "parcel"
 const val ID: String = "id"
 const val PARENT_ID: String = "parent_id"
@@ -39,8 +42,6 @@ const val LOGIN_ID: String = "login_id"
 const val LOGIN_TOKEN: String = "login_token"
 const val HAS_LOGGED_IN = "has_logged_in"
 
-class StaticConstants {
-    companion object {
-        var baseApiUrl = BASE_URL_GITHUB
-    }
+object StaticConstants {
+    var baseApiUrl = BASE_URL_GITHUB
 }
