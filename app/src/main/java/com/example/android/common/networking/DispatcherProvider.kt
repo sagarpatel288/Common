@@ -16,9 +16,14 @@ interface DispatcherProvider {
 /**
  * 4/8/2020
  * comment by srdpatel: 4/8/2020 Will be used as delegated SR class to provide thread
- * Delegated and SR classes are useful while writing Tests through mocking it
  * <p>
- *
+ * Delegated and SR classes are useful while writing Tests through mocking it.
+ * From the original author:
+ * Suppose we have used Dispatchers.Main somewhere in our repository or ViewModel and now we want to
+ * unit test our code on the JVM. As Dispatchers.Main is Android's MainThread, it won't be available on the JVM.
+ * Hence, our test will fail.
+ * The way I used it helps me to provide different configuration while testing the code and also
+ * I don't have to make changes to each every place I used Dispatchers
  * </p>
  * @author srdpatel
  * @since 1.0
