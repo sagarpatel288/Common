@@ -7,5 +7,6 @@ import kotlinx.android.parcel.Parcelize
 data class BaseResponse<T : Parcelable>(
     var status: String = "",
     var message: String = "",
+    var isPositive: Boolean = false,
     var data: T?
 ) : Parcelable
