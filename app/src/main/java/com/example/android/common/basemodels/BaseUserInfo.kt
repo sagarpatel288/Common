@@ -11,8 +11,8 @@ package com.example.android.common.basemodels
  * @param
  * @return
  * @author srdpatel
- * @see <a href="http://google.com"></a>
- * [] (http://google.com "")
+ * @see <a href="https://android.jlelse.eu/demystifying-the-jvmoverloads-in-kotlin-10dd098e6f72">JvmOverloads</a>
+ * [JvmOverloads] (https://android.jlelse.eu/demystifying-the-jvmoverloads-in-kotlin-10dd098e6f72 "JvmOverloads")
  * @since 1.0
  */
 data class BaseUserInfo @JvmOverloads constructor(

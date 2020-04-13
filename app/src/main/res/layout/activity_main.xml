@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.android.demos.baseviewmodels.ActivityMainViewModel" />
+            type="com.example.android.common.baseviewmodels.BaseFormViewModel" />
 
     </data>
 

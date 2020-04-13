@@ -46,8 +46,11 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
         dataBinding.lifecycleOwner = this
         dataBinding.setVariable(getBindingVariable(), viewModel)
         dataBinding(dataBinding)
+        setObservers()
         otherStuffs()
     }
+
+    abstract fun setObservers()
 
     /**
      * 4/11/2020
