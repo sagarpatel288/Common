@@ -38,8 +38,12 @@ class LearningUtils {
         //endregion
 
         //region Anonymous function
-        // comment by srdpatel: 4/19/2020 Assigning an anonymous function to a variable
-        val anonymousFunction = fun(a: Int, b: Int): Int = a + b
+        // comment by srdpatel: 4/19/2020 Assigning an anonymous function to a variable. Function type and return type are inferred.
+        val anonymousFunction = fun(a: Int, b: Int) = a + b
+        // comment by srdpatel: 4/19/2020 Assigning an anonymous function to a variable. Data type of parameter and return type are inferred.
+        val anonymousFun: (Int, Int) -> Int = fun(a, b) = a + b
+        // comment by srdpatel: 4/19/2020 Anonymous function with a single parameter
+        val anonymous: (Int) -> Int = fun(a) = a + 1
 
         // comment by srdpatel: 4/19/2020 Usage of anonymous function in higher order function
         doSomething(2, 3, anonymousFunction)
