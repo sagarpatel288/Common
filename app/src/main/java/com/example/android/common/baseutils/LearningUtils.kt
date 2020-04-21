@@ -4,25 +4,32 @@ class LearningUtils {
 
     /**
      * 4/20/2020
-     * A higher order function []
+     * A higher order function
      * <p>
      * A function that has another function/s as parameter/s is known as a higher order function.
      * "doSomething" is a higher order function that has a function type (or say, lambda parameter) "(Int, Int) -> Int" as a last parameter.
      * It can also be said that “doSomething” has the last parameter as a lambda expression.
-     * A functionType in any function parameter can be said as a lambda expression but
+     * A functionType in any function as a parameter can be said as a lambda expression but
      * there is nothing such as functionType as an argument as it is always a lambda expression then.
      * </p>
+     * @param myFunction This lambda expression will be called
      * @see <a href="http://google.com"></a>
      * [ReadableHyperlinkText]( "")
      * @author srdpatel
      * @since 1.0
      */
-    fun doSomething(a: Int, b: Int, myFunction: (Int, Int) -> Int) {
-
+    private fun doSomething(a: Int, b: Int, myFunction: (Int, Int) -> Int) {
+        println("variable a is $a and b is $b")
+        println(
+            "invoking function type, function literal, lambda expression or your anonymous function with " +
+                    "a as hard literal 10 and b as hard literal 20 from higher order function"
+        )
+        myFunction(10, 20)
     }
 
-    fun innerFunction(a: Int, b: Int): (Int, Int) -> Int {
-        return { c, d -> c / d }
+    private fun innerFunction(a: Int, b: Int): (Int, Int) -> Int {
+        println("from inner function block: a is $a and b is $b")
+        return { c, d -> c + d }
     }
 
     fun whatever() {
@@ -30,18 +37,44 @@ class LearningUtils {
         // comment by srdpatel: 4/20/2020 notice the return type of "innerFunction"
         doSomething(1, 2, innerFunction(3, 4))
 
+        //region Function Type
+        val functionType: (Int, Int) -> Int
+        val funType: (Int, Int) -> Int = innerFunction(4, 5)
+        doSomething(1,2, funType)
+        //endregion
+
         //region Function literal
-        // comment by srdpatel: 4/19/2020 Usage of function literal in higher order function
-        doSomething(3, 4) { a: Int, b: Int -> a * b }
+        /**
+         * 4/21/2020
+         * comment by srdpatel: 4/19/2020 Usage of function literal in higher order function
+         * <p>
+         * In order to execute this function literal, higher order function must call this function literal.
+         * So it will be like a function call for function literal from higher order function.
+         * </p>
+         * @see <a href="http://google.com"></a>
+         * [ReadableHyperlinkText]( "")
+         * @author srdpatel
+         * @since 1.0
+         */
+        doSomething(3, 4) { a: Int, b: Int ->
+            println("printing from function literal")
+            a + b
+        }
         //endregion
 
         //region Lambda expression
         // comment by srdpatel: 4/19/2020 Assigning a lambda expression to the variable
-        val lambdaSum: (Int, Int) -> Int = { a, b -> a + b }
-        val lambdaSubtraction = { a: Int, b: Int -> a - b }
+        val lambdaSum: (Int, Int) -> Int = { a, b ->
+            println("lambda sum")
+            a + b }
+        val lambdaSubtraction = { a: Int, b: Int ->
+            println("lambda subtraction")
+            a - b }
 
         // comment by srdpatel: 4/19/2020 Assigning a lambda expression with single parameter to the variable
-        val increment: (Int) -> Int = { it + 1 }
+        val increment: (Int) -> Int = {
+            println("increment")
+            it + 1 }
 
         // comment by srdpatel: 4/19/2020 Usage of lambda expression in higher order function
         doSomething(1, 2, lambdaSum)
@@ -58,6 +91,7 @@ class LearningUtils {
 
         // comment by srdpatel: 4/19/2020 Usage of anonymous function in higher order function
         doSomething(2, 3, anonymousFunction)
+        doSomething(1, 2, anonymousFun)
 
         // comment by srdpatel: 4/19/2020 Anonymous function
         doSomething(5, 6,
