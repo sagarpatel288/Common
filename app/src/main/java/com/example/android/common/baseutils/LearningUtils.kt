@@ -7,6 +7,7 @@ class LearningUtils {
      * A higher order function
      * <p>
      * A function that has another function/s as parameter/s is known as a higher order function.
+     * Function parameter is
      * "doSomething" is a higher order function that has a function type (or say, lambda parameter) "(Int, Int) -> Int" as a last parameter.
      * It can also be said that “doSomething” has the last parameter as a lambda expression.
      * A functionType in any function as a parameter can be said as a lambda expression but
@@ -63,17 +64,32 @@ class LearningUtils {
         //endregion
 
         //region Lambda expression
-        // comment by srdpatel: 4/19/2020 Assigning a lambda expression to the variable
+        /**
+         * 4/21/2020
+         * comment by srdpatel: 4/19/2020 Assigning a lambda expression to the variable []
+         * <p>
+         * This lambda expression has a function type (Int, Int) -> Int.
+         * </p>
+         * @see <a href="http://google.com"></a>
+         * [ReadableHyperlinkText]( "")
+         * @author srdpatel
+         * @since 1.0
+         */
         val lambdaSum: (Int, Int) -> Int = { a, b ->
             println("lambda sum")
+            // comment by srdpatel: 4/21/2020 Last statement is considered as return in lambda expression
             a + b }
+
+        // comment by srdpatel: 4/21/2020 The function type of this lambda expression is inferred as: (Int, Int) -> Int
         val lambdaSubtraction = { a: Int, b: Int ->
             println("lambda subtraction")
+            // comment by srdpatel: 4/21/2020 Last statement is considered as return in lambda expression
             a - b }
 
         // comment by srdpatel: 4/19/2020 Assigning a lambda expression with single parameter to the variable
         val increment: (Int) -> Int = {
             println("increment")
+            // comment by srdpatel: 4/21/2020 Last statement is considered as return in lambda expression
             it + 1 }
 
         // comment by srdpatel: 4/19/2020 Usage of lambda expression in higher order function
