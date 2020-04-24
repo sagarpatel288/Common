@@ -1,6 +1,6 @@
 package com.example.android.common.baseutils
 
-class LearningUtils {
+class LearningUtils: (Int, Int) -> Int {
 
     /**
      * 4/20/2020
@@ -31,7 +31,7 @@ class LearningUtils {
 
     fun doSomething(a: Int, b: Int, ft: (Int, Int) -> Int): String {
         val result = ft(a, b)
-        return "doSomething: " + result
+        return "doSomething: $result"
     }
 
     private fun percentage(a: Int, b: Int): Int {
@@ -96,7 +96,6 @@ class LearningUtils {
         //endregion
 
         //region Function literal
-
         // comment by srdpatel: 4/22/2020 Function literal stored in a variable
         val sum = { a: Int, b: Int -> a + b }
 
@@ -110,6 +109,10 @@ class LearningUtils {
          * <p>
          * In order to execute this function literal, higher order function must call this function literal.
          * So it will be like a function call for function literal from higher order function.
+         * </p>
+         * If the function type parameter is the last parameter in a higher order function,
+         * while calling such a higher order function, we can write our lambda (function literal)
+         * after the function call as done in this call.
          * </p>
          * @see <a href="http://google.com"></a>
          * [ReadableHyperlinkText]( "")
@@ -194,5 +197,24 @@ class LearningUtils {
         doSomethingReturnUnit(5, 6,
             fun(a: Int, b: Int): Int = a + b / 2)
         //endregion
+    }
+
+    /**
+     * 4/24/2020
+     * Override method when we implement a function type
+     * <p>
+     * Like an interface, we can implement a function type too.
+     * When we implement a function type, we get a method called "invoke" to override having a similar signature of the
+     * implemented function type
+     * </p>
+     *  {@link #} []
+     *
+     * @author srdpatel
+     * @see <a href="http://google.com"></a>
+     * [ReadableHyperlinkText]( "")
+     * @since 1.0
+     */
+    override fun invoke(p1: Int, p2: Int): Int {
+        return p1 + p2
     }
 }
