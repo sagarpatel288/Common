@@ -23,4 +23,8 @@ data class BaseUserInfo @JvmOverloads constructor(
     var mobile: String = "",
     var countryCode: String = "",
     var photo: String = ""
-)
+) {
+    fun BaseUserInfo.extensionFun(name: String) {
+        println(name)
+    }
+}

@@ -1,6 +1,8 @@
 package com.example.android.common.baseutils
 
-class LearningUtils: (Int, Int) -> Int {
+import com.example.android.common.basemodels.BaseUserInfo
+
+class LearningUtils : (Int, Int) -> Int {
 
     /**
      * 4/20/2020
@@ -29,7 +31,7 @@ class LearningUtils: (Int, Int) -> Int {
         myFunction(a, b) // OR: ```myFunction.invoke(a, b)```
     }
 
-    fun doSomething(a: Int, b: Int, ft: (Int, Int) -> Int): String {
+    private fun doSomething(a: Int, b: Int, ft: (Int, Int) -> Int): String {
         val result = ft(a, b)
         return "doSomething: $result"
     }
@@ -197,6 +199,70 @@ class LearningUtils: (Int, Int) -> Int {
         doSomethingReturnUnit(5, 6,
             fun(a: Int, b: Int): Int = a + b / 2)
         //endregion
+
+
+        //region Extension function
+        /**
+         * 4/30/2020
+         * An example of Extension function
+         * <p>
+         * In kotlin, we can add a new function for any class anywhere, even in any other class.
+         * Such a function is called an “Extension function” and
+         * we can use such an extension function only inside the class where it is created.
+         * In order to create an extension function,
+         * we write the class name followed by a dot, followed by our function.
+         * The class name followed by a dot is called a receiver or receiver type.
+         * In this example, receiver is: String
+         * </p>
+         *
+         * @author srdpatel
+         * @since 1.0
+         */
+        fun String.extensionFunction() {
+            //We can access the receiver (Here, it is String) using "this" keyword inside the block
+            println("from extension function: $this")
+        }
+
+        val myString = "MyString"
+        myString.extensionFunction() //prints: from extension function: MyString
+
+        fun BaseUserInfo.extensionFunction() {
+            val userName = this.defaultName
+            println("from extension function: ${this.defaultName}")
+        }
+
+        val userInfo = BaseUserInfo()
+        userInfo.extensionFunction()
+
+        //region Extension function with same receiver type as in function type parameter
+        fun String.extensionFunction(ft: String.() -> String) {
+            val ftExtension = ft()
+            println("from extension function: $ftExtension")
+        }
+
+        val ftExtension: String.() -> String = { "from ft extension: $this" }
+        myString.extensionFunction(ftExtension) //prints: from extension function: from ft extension: MyString
+        //endregion
+
+        //region Extension function type parameter in higher order function
+        fun doSomething(x: Int, y: Int, ft: Int.(Int) -> Int) {
+            val ftWithReceiver = x.ft(y) //OR ft(x, y). Both will do x-y
+            println("doSomething: $ftWithReceiver")
+        }
+
+        val ftSubtraction: Int.(Int) -> Int = { y: Int -> this - y }
+
+        //passing as an anonymous function
+        doSomething(1, 2) { y: Int -> this - y } //prints: doSomething: -1
+
+        //passing as a lambda variable
+        doSomething(1, 2, ftSubtraction) //prints: doSomething: -1
+
+
+        //endregion
+
+
+        //endregion
     }
 
     /**
@@ -216,5 +282,10 @@ class LearningUtils: (Int, Int) -> Int {
      */
     override fun invoke(p1: Int, p2: Int): Int {
         return p1 + p2
+    }
+
+
+    fun BaseUserInfo.myExtensionFunction(): String {
+        return this.userId + " " + this.defaultName
     }
 }
