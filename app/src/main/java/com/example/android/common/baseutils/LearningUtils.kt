@@ -66,6 +66,21 @@ class LearningUtils : (Int, Int) -> Int {
 
     private fun compare(a: String, b: String): Boolean = a.length < b.length
 
+    private fun getSomeValue(): Int? = (10..100).random()
+
+    private fun getSomeValue(nullableString: String?): StringBuilder? =
+        if (nullableString != null) StringBuilder(nullableString) else null
+
+    private fun getEvenOrZero(randomNumber: Int): Int =
+        if (randomNumber.rem(2) == 0) randomNumber else 0
+
+    private fun getEvenOrNull(randomNumber: Int): Int? =
+        if (randomNumber.rem(2) == 0) randomNumber else null
+
+    private fun getHalf(number: Int?): Int = number?.div(2) ?: 0
+
+    private fun division(number: Int, divideBy: Int): Int = number / divideBy
+
     fun whatever() {
 
         // comment by srdpatel: 4/20/2020 notice the return type of "innerFunction"
@@ -347,109 +362,349 @@ class LearningUtils : (Int, Int) -> Int {
 
         //region Scope functions
         val name = "test"
-        val sb: StringBuilder? = StringBuilder("test")
+        var sb: StringBuilder? = StringBuilder("test")
 
         fun doSomething(name: String) {
             println("Name from the method doSomething is: $name")
         }
 
-        //region with, demonstrating how it is useful for multiple operations
+        fun getSbOrNull(nullableString: String?): java.lang.StringBuilder? {
+            return if (nullableString != null) java.lang.StringBuilder(nullableString) else null
+        }
+
+        //region without with, demonstrating how we had to take an extra variable for multiple operations
+        fun withoutWith() {
+            val randomNumber = (1..10).random()
+            println("withoutWith: divide by 2:  ${randomNumber.div(2)}")
+            println("withoutWith: multiply by 2: ${randomNumber.times(2)} ")
+            println("withoutWith: plus 2: ${randomNumber.plus(2)}")
+        }
+        //endregion
+
+        //region with, demonstrating how we can avoid an extra variable using "with" scope function
         fun withDemo() {
-            with(name) {
-                println("the original name is: $this")
-                //Some random operations on the receiver type
-                reversed()
-                toUpperCase(Locale.ENGLISH)
-                //Sending original receiver type.
-                doSomething(this)
+            with((1..10).random()) {
+                println("withDemo: divide by 2:  ${this.div(2)}")
+                println("withDemo: multiply by 2: ${this.times(2)} ")
+                println("withDemo: plus 2: ${this.plus(2)}")
             }
         }
         //endregion
 
-        //region let, demonstrating how we can avoid variable
-        StringBuilder("test").let {
-            //it refers to a StringBuilder here
-            println("the original name is: $it")
-            it.reversed()
-            it.toString()
-//            println(it) //It makes the return type unit and the next chain call of any function will be on Unit
-        }.let {
-            //it refers to a String type here
-            println("first to second let block: $it")
-            it.toUpperCase(Locale.ENGLISH)
-        }.let {
-            //it is a String type with all upper case letters here
-            println("second to third let bloc: $it")
-            doSomething(it) //[doSomething] is a function that accepts a string argument
+        //region with demo without using explicit this
+        fun withNoThisDemo() {
+            with((1..10).random()) {
+                println("withDemoWithoutThis: divide by 2:  ${div(2)}")
+                println("withDemoWithoutThis: multiply by 2: ${times(2)} ")
+                println("withDemoWithoutThis: plus 2: ${plus(2)}")
+            }
         }
         //endregion
 
-        fun equivalentOfLet() {
-            println("the original name is: $sb")
-            sb?.reversed()
-            val ns = sb?.toString()
-            println("first to second let block: $ns")
-            val nsUc = ns?.toUpperCase(Locale.ENGLISH)
-            println("second to third let block: $nsUc")
-            doSomething(nsUc ?: "") //[doSomething] is a function that accepts a string argument
+        //region with, demonstrating multiple operations on a nullable variable
+        fun withOnNullable() {
+            println("withNullableDemo...")
+            with(getEvenOrNull((1..10).random())) {
+                println("withNullableDemo: divide by 2:  ${this?.div(2)}")
+                println("withNullableDemo: multiply by 2: ${this?.times(2)} ")
+                println("withNullableDemo: plus 2: ${this?.plus(2)}")
+            }
         }
+        //endregion
+
+        //region let, demonstrating how it is useful for multiple operations on a nullable variable
+        fun letDemo() {
+            println("letDemo...")
+            getEvenOrNull((1..10).random())?.let {
+                println("letDemo: divide by 2:  ${it.div(2)}")
+                println("letDemo: multiply by 2: ${it.times(2)} ")
+                println("letDemo: plus 2: ${it.plus(2)}")
+            }
+        }
+        //endregion
+
+        //region A chain operation without let
+        fun equivalentOfLet() {
+            //[sb] is a nullable [StringBuilder] here.
+            println("the original string builder: $sb")
+            sb?.reversed()
+            val ts = sb?.toString()
+            println("reversed string: $ts")
+            val tsUc = ts?.toUpperCase(Locale.ENGLISH)
+            println("capital: $tsUc")
+            doSomething(tsUc ?: "") //[doSomething] is a function that accepts a string argument
+        }
+        //endregion
 
         //region let, demonstrating how it is useful for nullable variable
-        sb?.let {
+        /**
+         * 6/3/2020
+         * [sb] is a nullable [StringBuilder]
+         * @author srdpatel
+         * @since 1.0
+         */
+        fun letChainOperation() {
+            //[sb] is a nullable [StringBuilder] here.
+            sb?.let {
+                //it refers to a StringBuilder here
+                println("the original string builder: $it")
+                it.reversed()
+                it.toString()
+                //            println(it) //It makes the return type unit and the next chain call of any function will be on Unit
+            }?.let {
+                //it refers to a String type here
+                println("reversed string: $it")
+                it.toUpperCase(Locale.ENGLISH)
+            }?.let {
+                //it is a String type with all upper case letters here
+                println("capital: $it")
+                doSomething(it) //[doSomething] is a function that accepts a string argument
+            }
+        }
+        //endregion
+
+        //region let, demonstrating a chain operation using let
+        StringBuilder("test").let {
             //it refers to a StringBuilder here
-            println("the original name is: $it")
+            println("the original string builder: $it")
             it.reversed()
             it.toString()
 //            println(it) //It makes the return type unit and the next chain call of any function will be on Unit
-        }?.let {
+        }.let {
             //it refers to a String type here
-            println("first to second let block: $it")
+            println("reversed string: $it")
             it.toUpperCase(Locale.ENGLISH)
-        }?.let {
+        }.let {
             //it is a String type with all upper case letters here
-            println("second to third let bloc: $it")
+            println("capital: $it")
             doSomething(it) //[doSomething] is a function that accepts a string argument
         }
         //endregion
 
+        //region Multiple operations without let on nullable variables
+        fun withoutLet() {
+            println("without let...")
+            val randomNumber = getEvenOrNull((10..100).random())
+            if (randomNumber != null) {
+                println("the random number is: $randomNumber")
+                val sbon = StringBuilder(randomNumber.toString())
+                println("the original string builder is: $sbon")
+                val append = sbon.append(" test")
+                println("appended test: $append")
+                val rs = append.reversed()
+                println("reversed string: $rs")
+                val tsUc = rs.toString().toUpperCase(Locale.ENGLISH)
+                println("toUpperCase: $tsUc")
+                doSomething(tsUc ?: "")//[doSomething] is a function that accepts a string argument
+            } else {
+                println("null value")
+            }
+        }
+        //endregion
+
+        //region A chain operation with let on a nullable variable
+        fun letChainOperationOnNullable() {
+            println("with let...")
+            getEvenOrNull((10..100).random())?.let {
+                println("the random number is: $it")
+                StringBuilder(it.toString())
+            }?.let {
+                println("the original string builder is: $it")
+                it.append(" test")
+            }?.let {
+                println("appended test: $it")
+                it.reversed()
+            }?.let {
+                println("reversed string: $it")
+                it.toString().toUpperCase(Locale.ENGLISH)
+            }?.let {
+                println("toUpperCase: $it")
+                doSomething(it)
+            } ?: println("null value")
+        }
+        //endregion
+
+        letChainOperationOnNullable()
+
+        //region A chain operation with run on a nullable variable
+        fun runChainOperationOnNullable() {
+            println("with run...")
+            getEvenOrNull((10..100).random())?.run {
+                println("the random number is: $this")
+                StringBuilder(toString())
+            }?.run {
+                println("the original string builder is: $this")
+                append(" test")
+            }?.run {
+                println("appended test: $this")
+                reversed()
+            }?.run {
+                println("reversed string: $this")
+                toString().toUpperCase(Locale.ENGLISH)
+            }?.run {
+                println("toUpperCase: $this")
+                doSomething(this)
+            } ?: println("null value")
+        }
+        //endregion
+
+        runChainOperationOnNullable()
+
+        //region A chain operation using run + let on a nullable variable
+        fun runLetChainOperationOnNullable() {
+            println("using run + let...")
+            getEvenOrNull((10..100).random())?.run {
+                println("the random number is: $this")
+                StringBuilder(toString())
+            }?.run {
+                println("the original string builder is: $this")
+                append(" test")
+            }?.run {
+                println("appended test: $this")
+                reversed()
+            }?.run {
+                println("reversed string: $this")
+                toString().toUpperCase(Locale.ENGLISH)
+            }?.let {
+                //yes, we have used let instead of run here because passing "it" seems better than passing "this"!
+                println("toUpperCase: $it")
+                doSomething(it)
+            } ?: println("null value")
+        }
+        //endregion
+
+        runLetChainOperationOnNullable()
+
+        //region A chain operation using run + let + also on a nullable variable
+        fun runLetAlsoChainOperationOnNullable() {
+            println("using runLetAlso...")
+            getEvenOrNull((10..100).random())?.also {
+                println("the random number is: $it")
+                //Any operation on the context object will not change the object!
+                it.plus(2)
+                it.compareTo(50)
+            }?.run {
+                StringBuilder(toString())
+            }?.also {
+                println("the original string builder is: $it")
+            }?.run {
+                append(" test")
+            }?.also {
+                println("appended test: $it")
+            }?.run {
+                reversed()
+            }?.also {
+                println("reversed string: $it")
+            }?.run {
+                toString().toUpperCase(Locale.ENGLISH)
+            }?.let {
+                println("toUpperCase: $it")
+                doSomething(it)
+            } ?: println("null value")
+        }
+        //endregion
+
+        runLetAlsoChainOperationOnNullable()
+
+        //region A chain operation using run + let + also + apply on a nullable variable
+        fun runLetAlsoApplyChainOperationOnNullable() {
+            println("with runLetAlsoApply...")
+            getEvenOrNull((10..100).random())?.also {
+                println("the random number is: $it")
+            }?.apply {
+                //Any operation on the context object will not change the object!
+                plus(2)
+                compareTo(50)
+            }?.run {
+                StringBuilder(toString())
+            }?.also {
+                println("the original string builder is: $it")
+            }?.run {
+                append(" test")
+            }?.also {
+                println("appended test: $it")
+            }?.run {
+                reversed()
+            }?.also {
+                println("reversed string: $it")
+            }?.run {
+                toString().toUpperCase(Locale.ENGLISH)
+            }?.let {
+                println("toUpperCase: $it")
+                doSomething(it)
+            } ?: println("null value")
+        }
+        //endregion
+
+        runLetAlsoApplyChainOperationOnNullable()
+
         //region run, demonstrating how it is useful for nullable variable
-        sb?.run {
-            //it refers to a StringBuilder here
-            println("the original name is: $this")
-            reversed()
-            toString()
-//            println(it) //It makes the return type unit and the next chain call of any function will be on Unit
-        }?.run {
-            //it refers to a String type here
-            println("first to second let block: $this")
-            toUpperCase(Locale.ENGLISH)
-        }?.run {
-            //it is a String type with all upper case letters here
-            println("second to third let bloc: $this")
-            doSomething(this) //[doSomething] is a function that accepts a string argument
+        fun runDemo() {
+            //[sb] is a nullable [StringBuilder]
+            sb?.run {
+                //[this] refers to a StringBuilder here
+                println("the original string builder: $this")
+                reversed()
+                toString()
+//            println(this) //It makes the return type unit and the next chain call of any function will be on Unit
+            }?.run {
+                //[this] refers to a String type here
+                println("reversed string: $this")
+                toUpperCase(Locale.ENGLISH)
+            }?.run {
+                //[this] is a String type with all upper case letters here
+                println("capital: $this")
+                doSomething(this) //[doSomething] is a function that accepts a string argument
+            }
+        }
+        //endregion
+
+        //region let + run, demonstrating how it is useful
+        fun letRunDemo() {
+            //[sb] is a nullable [StringBuilder]
+            sb?.run {
+                //this refers to a StringBuilder here
+                println("the original string builder: $this")
+                reversed()
+                toString()
+//            println(this) //It makes the return type unit and the next chain call of any function will be on Unit
+            }?.run {
+                //this refers to a String type here
+                println("reversed string: $this")
+                toUpperCase(Locale.ENGLISH)
+            }?.let {
+                //[it] is a String type with all upper case letters here
+                println("capital: $it")
+                doSomething(it) //[doSomething] is a function that accepts a string argument
+            }
         }
         //endregion
 
         //region let + T.run + also
-        sb?.also {
-            //it refers to a StringBuilder here
-            println("the original name is: $it")
-        }?.run {
-            reversed()
-            toString()
+        fun letRunAlso() {
+            sb?.also {
+                //it refers to a StringBuilder here
+                println("the original string builder: $it")
+                //Any operation on the context object inside the also block does not change the object
+                sb = StringBuilder("new by also")
+                //"also" returns the object instead of the last statement! Here, it returns stringBuilder instance "sb".
+            }?.run {
+                reversed()
+                toString()
 //            println(it) //It makes the return type unit and the next chain call of any function will be on Unit
-        }?.also {
-            //it refers to a String type here
-            println("first to second let block: $it")
-        }?.run {
-            toUpperCase(Locale.ENGLISH)
-        }?.also {
-            //it is a String type with all upper case letters here
-            println("second to third let block: $it")
-        }?.let {
-            doSomething(it) //[doSomething] is a function that accepts a string argument
-        } ?: run {
-            println("string is null")
+            }?.also {
+                //it refers to a String type here
+                println("reversed string: $it")
+            }?.run {
+                toUpperCase(Locale.ENGLISH)
+            }?.also {
+                //it is a String type with all upper case letters here
+                println("capital: $it")
+            }?.let {
+                doSomething(it) //[doSomething] is a function that accepts a string argument
+            } ?: run {
+                println("string is null")
+            }
         }
         //endregion
 
@@ -485,7 +740,6 @@ class LearningUtils : (Int, Int) -> Int {
 
         //endregion
 
-
         //region else part will not be executed
         fun computeElements(): List<Int>? = emptyList()
 
@@ -506,12 +760,12 @@ class LearningUtils : (Int, Int) -> Int {
         //endregion
 
         //region with
-        fun withLetDemo(){
+        fun withLetDemo() {
             with(name) {
                 println("the original name is: $this")
                 reversed()
                 toUpperCase(Locale.ENGLISH)
-            }.let{
+            }.let {
                 doSomething(it)
             }
         }
@@ -557,12 +811,12 @@ class LearningUtils : (Int, Int) -> Int {
             someFunction(ftOne) //passing a function type to another function within higher order function body
         /*...*/
     }
-    //endregion
+//endregion
 
     fun someFunction(ft: Int.(Int) -> Int): Int {
         val result = 2.ft(1)
         println("from some function: $result")
         return result
     }
-    //endregion
+//endregion
 }
