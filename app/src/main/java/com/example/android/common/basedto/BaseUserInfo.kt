@@ -1,4 +1,4 @@
-package com.example.android.common.basemodels
+package com.example.android.common.basedto
 
 /**
  * 4/4/2020

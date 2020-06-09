@@ -28,6 +28,23 @@
  * THE SOFTWARE.
  */
 
-package com.example.android.common.basemodels
+package com.example.android.common.basedto
 
-class RedditApiResponse(val data: RedditListing)
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+
+@Entity
+data class RedditPost(
+    @SerializedName("name")
+    val key: String,
+    @SerializedName("title")
+    @PrimaryKey
+    val title: String,
+    @SerializedName("score")
+    val score: Int,
+    @SerializedName("author")
+    val author: String,
+    @SerializedName("num_comments")
+    val commentCount: Int
+)

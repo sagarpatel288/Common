@@ -1,4 +1,4 @@
-package com.example.android.common.basedi.networkmodules
+package com.example.android.common.basedi.baseNetworkmodules
 
 import android.util.Log
 import com.example.android.common.baseconstants.StaticConstants
@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * @author srdpatel
  * @since 1.0
  */
-val networkModule = module {
+val baseNetworkModule = module {
 
     single {
         AuthInterceptor()
@@ -110,8 +110,8 @@ fun getOkHttpClient(
 
 /**
  * Inspired from:
- * [BirjuVachhani login mvvm final code] (https://github.com/BirjuVachhani/login-mvvm-final-code/blob/master/app/src/main/java/com/example/loginmvvm/login/di/NetworkModule.kt)
- * @see <a href="https://github.com/BirjuVachhani/login-mvvm-final-code/blob/master/app/src/main/java/com/example/loginmvvm/login/di/NetworkModule.kt">Birju Vachhani login mvvm final code</a>
+ * [BirjuVachhani login mvvm final code] (https://github.com/BirjuVachhani/login-mvvm-final-code/blob/master/app/src/main/java/com/example/loginmvvm/login/di/BaseNetworkModule.kt)
+ * @see <a href="https://github.com/BirjuVachhani/login-mvvm-final-code/blob/master/app/src/main/java/com/example/loginmvvm/login/di/BaseNetworkModule.kt">Birju Vachhani login mvvm final code</a>
  * @author srdpatel
  * @since 1.0
  */

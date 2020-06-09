@@ -28,8 +28,6 @@
  * THE SOFTWARE.
  */
 
-package com.example.android.common.basemodels
-
-import com.example.android.common.basemodels.RedditPost
+package com.example.android.common.basedto
 
 class PostContainer(val data: RedditPost)

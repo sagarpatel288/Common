@@ -1,6 +1,6 @@
 package com.example.android.common.basestate
 
-import com.example.android.common.basemodels.BaseResponse
+import com.example.android.common.basedto.BaseResponse
 
 sealed class StateLogInSignUpForm {
     // comment by srdpatel: 4/13/2020 add other validations like name, firstName, middleName, lastName etc... as we need

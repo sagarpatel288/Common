@@ -1,6 +1,6 @@
 package com.example.android.common.baserest
 
-import com.example.android.common.basemodels.Weather
+import com.example.android.common.basedto.Weather
 import retrofit2.http.GET
 import retrofit2.http.Query
 

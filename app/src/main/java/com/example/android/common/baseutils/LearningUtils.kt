@@ -1,6 +1,6 @@
 package com.example.android.common.baseutils
 
-import com.example.android.common.basemodels.BaseUserInfo
+import com.example.android.common.basedto.BaseUserInfo
 import java.util.*
 
 class LearningUtils : (Int, Int) -> Int {

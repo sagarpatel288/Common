@@ -1,0 +1,23 @@
+<resources>
+    <string name="com_st_error_empty_photo">Please select and upload photo</string>
+    <string name="com_st_error_empty_first_name">Please enter your first name</string>
+    <string name="com_st_error_empty_last_name">Please enter your last name</string>
+    <string name="com_st_error_empty_name">Please enter your name</string>
+    <string name="com_st_error_empty_email">Please enter your email</string>
+    <string name="com_st_error_invalid_email">Please enter valid email</string>
+    <string name="com_st_error_empty_country_code">Please enter country code</string>
+    <string name="com_st_error_invalid_country_code">Please enter valid country code</string>
+    <string name="com_st_error_empty_mobile_number">Please enter your mobile number</string>
+    <string name="com_st_error_invalid_mobile_number">Please enter valid mobile number</string>
+    <string name="com_st_error_empty_address">Please enter your address</string>
+    <string name="com_st_error_empty_area">Please enter area of your address</string>
+    <string name="com_st_error_empty_district">Please enter your district</string>
+    <string name="com_st_error_empty_pin_code">Please enter your pincode</string>
+    <string name="com_st_error_empty_state">Please enter your state</string>
+    <string name="com_st_error_empty_password">Please enter your password</string>
+    <string name="com_st_error_invalid_password">Please enter valid password</string>
+    <string name="com_st_error_short_password">Password must be at least 8 characters long</string>
+    <string name="com_st_error_easy_password">Password must contain: One upper case letter, one lower case letter, one number and one symbol</string>
+    <string name="com_st_error_empty_confirm_password">Please confirm the password</string>
+    <string name="com_st_error_password_mismatch">"Password" and "confirm password" must be the same</string>
+</resources>

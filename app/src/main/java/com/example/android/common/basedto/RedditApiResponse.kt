@@ -28,8 +28,6 @@
  * THE SOFTWARE.
  */
 
-package com.example.android.common.basemodels
+package com.example.android.common.basedto
 
-import com.example.android.common.basemodels.PostContainer
-
-class RedditListing(val children: List<PostContainer>, val after: String?, val before: String?)
+class RedditApiResponse(val data: RedditListing)

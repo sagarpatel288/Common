@@ -1,4 +1,4 @@
-package com.example.android.common.basemodels
+package com.example.android.common.basedto
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

@@ -30,7 +30,7 @@
 
 package com.example.android.common.baserest
 
-import com.example.android.common.basemodels.RedditApiResponse
+import com.example.android.common.basedto.RedditApiResponse
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

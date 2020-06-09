@@ -7,7 +7,6 @@ import com.example.android.common.baseconstants.HAS_LOGGED_IN
 import com.example.android.common.baseconstants.StaticConstants
 import com.example.android.common.basedb.basedao.CategoryDao
 import com.example.android.common.basedb.basedao.ProductDao
-import com.example.android.common.basemodels.BaseUserInfo
 import com.example.android.ecommerce.model.Product
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -85,6 +84,11 @@ class BaseUtils {
         @JvmStatic
         fun hasLoggedIn(sharedPrefs: SharedPreferences): Boolean {
             return sharedPrefs.getString(HAS_LOGGED_IN, "").toString().isNotEmpty()
+        }
+
+        @JvmStatic
+        fun isLoggedIn(sharedPrefs: SharedPreferences): Boolean {
+            return sharedPrefs.getBoolean(HAS_LOGGED_IN, false)
         }
 
         @JvmStatic

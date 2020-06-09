@@ -1,4 +1,4 @@
-package com.example.android.common.basemodels
+package com.example.android.common.basedto
 
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
