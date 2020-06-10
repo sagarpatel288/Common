@@ -1,6 +1,5 @@
 package com.example.android.common.baseutils
 
-import android.telephony.PhoneNumberUtils
 import com.example.android.common.R
 import com.example.android.common.basedto.ValidationDto
 import com.example.android.common.basedto.ValueDto
@@ -80,15 +79,55 @@ class ValidationUtils {
             return ValidationDto(false, -1, "")
         }
 
+        /**
+         * 6/9/2020
+         * [source](https://stackoverflow.com/questions/6358380/phone-number-validation-android)
+         * @author srdpatel
+         * @since 1.0
+         */
         @JvmStatic
-        fun isValidEmail(email: String): Boolean {
-            return email.isNotEmpty() && emailPattern.matcher(email).matches()
+        fun isValidPhoneNumberWithCountryCode(phoneNumberWithCountryCode: String): Boolean {
+            // comment by srdpatel: 6/9/2020 Google country code validator
+            val regEx: Regex = Regex("^[+]?[0-9]{8,20}$")
+            return (phoneNumberWithCountryCode.matches(regEx))
+        }
+
+        /**
+         * 6/9/2020
+         * [Reference](https://www.geeksforgeeks.org/how-to-validate-a-password-using-regular-expressions-in-java/)
+         * [Validation regExes](https://owasp.org/www-community/OWASP_Validation_Regex_Repository)
+         * ^ represents starting character of the string.
+         * ?= means positive look ahead (if there is)
+         * . means any character
+         * * means zero or more
+         * Square bracket [] represents OR condition
+         * [0-9] means any digit between 0-9 with OR condition (like 0 or 1 or 2 etc..., anything between 0 to 9)
+         * [a-z] means any letter between a to z with OR condition (like a or b or c etc..., anything between a to z)
+         * [A-z] means any letter between A to Z with OR condition (like A or B or C etc..., anything between A to Z)
+         * + means one or more
+         * (?=.*[0-9]) represents a digit must occur at least once.
+         * (?=.*[a-z]) represents a lower case alphabet must occur at least once.
+         * (?=.*[A-Z]) represents an upper case alphabet that must occur at least once.
+         * (?=.*[@#$%^&-+=()] represents a special character that must occur at least once.
+         * (?=\\S+$) white spaces don’t allowed in the entire string.
+         * .{8, 20} represents at least 8 characters and at most 20 characters.
+         * $ represents the end of the string.
+         * @author srdpatel
+         * @since 1.0
+         */
+        @JvmStatic
+        fun isValidPassword(password: String?): Boolean {
+            /*https://www.geeksforgeeks.org/how-to-validate-a-password-using-regular-expressions-in-java*/
+            val regEx = Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,20}$")
+            return password != null && password.isNotEmpty() && password.matches(regEx)
         }
 
         @JvmStatic
-        fun isValidPhoneNumber(phoneNumberWithCountryCode: String): Boolean {
-            // comment by srdpatel: 6/9/2020 Google country code validator
-            return phoneNumberWithCountryCode.isNotEmpty() && PhoneNumberUtils.isGlobalPhoneNumber(phoneNumberWithCountryCode)
+        fun isValidEmail(email: String?): Boolean {
+            /*https://www.geeksforgeeks.org/check-email-address-valid-not-java*/
+            /*https://owasp.org/www-community/OWASP_Validation_Regex_Repository*/
+            val regEx = Regex("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}")
+            return email != null && email.isNotEmpty() && emailPattern.matcher(email).matches() && email.matches(regEx)
         }
     }
 }
