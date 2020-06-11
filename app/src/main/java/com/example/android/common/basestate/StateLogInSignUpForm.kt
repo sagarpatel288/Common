@@ -16,5 +16,5 @@ sealed class StateLogInSignUpForm {
     object Loading : StateLogInSignUpForm()
     object Ok: StateLogInSignUpForm()
     object False: StateLogInSignUpForm()
-    data class Result(val result: BaseResponse<*>) : StateLogInSignUpForm()
+    data class Result(val result: BaseResponse) : StateLogInSignUpForm()
 }

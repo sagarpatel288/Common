@@ -1,6 +1,7 @@
 package com.example.android.common.baseutils
 
 import android.content.SharedPreferences
+import android.telephony.PhoneNumberUtils
 import androidx.sqlite.db.SimpleSQLiteQuery
 import androidx.sqlite.db.SupportSQLiteQuery
 import com.example.android.common.baseconstants.HAS_LOGGED_IN
@@ -13,7 +14,12 @@ import com.google.gson.JsonObject
 import com.google.gson.internal.LinkedTreeMap
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
+import java.util.*
+import kotlin.collections.ArrayList
 
+fun main() {
+    println(TimeZone.getDefault().id)
+}
 
 class BaseUtils {
 
@@ -94,6 +100,16 @@ class BaseUtils {
         @JvmStatic
         fun setBaseApiUrl(baseUrl: String) {
             StaticConstants.baseApiUrl = baseUrl
+        }
+
+        @JvmStatic
+        fun getLocale(): Locale {
+            return Locale.getAvailableLocales()[0]
+        }
+
+        @JvmStatic
+        fun getCountryCode(): String {
+            return PhoneNumberUtils.FORMAT_UNKNOWN.toString()
         }
     }
 }

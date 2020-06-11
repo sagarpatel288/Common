@@ -79,6 +79,8 @@ class ValidationUtils {
             return ValidationDto(false, -1, "")
         }
 
+
+
         /**
          * 6/9/2020
          * [source](https://stackoverflow.com/questions/6358380/phone-number-validation-android)

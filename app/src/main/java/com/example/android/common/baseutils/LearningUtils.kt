@@ -729,7 +729,7 @@ class LearningUtils : (Int, Int) -> Int {
             var random: Int? = null
             if (random != null) {
                 println("Random number is not null...")
-                println(random)
+                println(random.toString())
                 println("Gave random number")
             } else {
                 println("Generating random number...")
