@@ -9,6 +9,7 @@ import com.example.android.common.BR
 
 /**
  * 2/5/2020
+ * <p>
  * Our class is parameterized class and we have set constraints for accepting generics.
  * Any activity extending (inheriting) this class must pass two generic types [VDB] & [BVM].
  * [VDB] is something that is required while extending (inheriting) this [BaseActivity] class.
@@ -18,10 +19,21 @@ import com.example.android.common.BR
  * [layoutResId] will mostly different for each and every view class.
  * That's why, we have taken [VDB] as lateinit.
  * [viewModel] can be different for each and every view, that's why we have taken it as an abstract val.
+ * <p>
+ * 12/3/2019
+ * Check provided links to understand generics and @LayoutRes annotation
+ * <p>
+ * This is for abstraction. We have enforced the architecture rules that each activity extending
+ * this [BaseActivity] must have its viewModel, viewDataBinding and xml layout.
+ * This is to reduce some boiler plate codes such as to get viewDataBinding, set lifeCycleOwner and
+ * to set viewModel.
+ * </p>
  *
  * @param VDB A generic type with restriction that it must extend [ViewDataBinding]
  * @param BVM A generic type with restriction that it must extend [BaseViewModel]
  * @see <a href="https://kotlinlang.org/docs/tutorials/kotlin-for-py/generics.html">Kotlin Generics</a>
+ * [Generics](https://www.journaldev.com/1663/java-generics-example-method-class-interface)
+ * [AndroidX: layout in the constructor of the activity](https://www.bignerdranch.com/blog/activity-and-fragment-layouts-with-androidx/)
  * @author srdpatel
  * @since 1.0
  */

@@ -19,6 +19,29 @@
         <item name="radioButtonStyle">@style/MyRadioButton</item>
     </style>
 
+    <!--region Transparent activity: https://blog.mindorks.com/how-to-create-a-transparent-activity-in-android-->
+    <style name="Theme.MaterialComponents.Transparent.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!--region Window in which the activity is present-->
+        <item name="android:windowIsTranslucent">true</item>
+        <!--endregion-->
+        <!--region Background of the main window-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--endregion-->
+        <!--region Overlay over the foreground of the window-->
+        <item name="android:windowContentOverlay">@null</item>
+        <!--endregion-->
+        <!--region Title or not-->
+        <item name="android:windowNoTitle">true</item>
+        <!--endregion-->
+        <!--region Floating or not-->
+        <item name="android:windowIsFloating">true</item>
+        <!--endregion-->
+        <!--region Dimming behind the window-->
+        <item name="android:backgroundDimEnabled">false</item>
+        <!--endregion-->
+    </style>
+    <!--endregion-->
+
     <!--Style for the checkboxes-->
     <style name="MyCheckbox" parent="Base.Widget.AppCompat.CompoundButton.CheckBox">
         <item name="buttonTint">@android:color/holo_purple</item>
