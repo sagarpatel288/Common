@@ -2,7 +2,6 @@ package com.example.android.common.baseviewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.android.common.baseapp.BaseViewModel
 import com.example.android.common.basestate.StateLogInSignUpForm
 import org.koin.core.KoinComponent
 

@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.example.android.common.BR
+import com.example.android.common.baseviewmodels.BaseViewModel
 
 /**
  * 4/10/2020
