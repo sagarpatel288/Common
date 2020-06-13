@@ -184,6 +184,7 @@ class LearningUtils : (Int, Int) -> Int {
          * 5/7/2020
          * Last statement is considered as return statement for a function literal
          * <p>
+         * (Tags: method function code in markdown doc comment example)
          * Below method will give an error:
          * ```
          * Type mismatch.

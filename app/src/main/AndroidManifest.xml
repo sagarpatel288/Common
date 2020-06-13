@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".baseapp.PermissionActivity"
+        <activity android:name=".baseapp.permission.PermissionActivity"
             android:theme="@style/Theme.MaterialComponents.Transparent.NoActionBar">
         </activity>
         <activity android:name=".MainActivity">
