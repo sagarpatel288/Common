@@ -6,15 +6,26 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.example.android.common.BR
+import com.example.android.common.baseviewmodels.BaseViewModel
 
 /**
  * 2/5/2020
  * <p>
+ * We have used generic abstract class assuming that each and every class that extends this [BaseActivity] class will have
+ * [VDB] and [BVM] or its relevant subtypes but with different values.
+ * <p>
+ * We use generics (parameterized type) when we want to implement same functionality (Add, remove, count).
+ * Whereas, we use inheritance when we want to give a flexibility for the alteration of the common functionality.
+ * This [BaseActivity] class uses both inheritance and generics together as we know there will be some kinds of
+ * [VDB] and [BVM] (generics) but with different implementation (inheritance).
+ * [Generics Vs Inheritance](https://stackoverflow.com/a/799395/5492211)
+ * And we use composition with interface when we want to establish "has-a" relationship with dependency injection.
+ * <p>
  * Our class is parameterized class and we have set constraints for accepting generics.
- * Any activity extending (inheriting) this class must pass two generic types [VDB] & [BVM].
+ * Any activity extending (inheriting) this [BaseActivity] class must pass two generic types [VDB] & [BVM].
  * [VDB] is something that is required while extending (inheriting) this [BaseActivity] class.
  * However, [VDB] is available only after we explicitly bind it with our [layoutResId].
- * We always going to set/assign the [VDB] in [onCreate] anyways using [layoutResId].
+ * We always set/assign the [VDB] in [onCreate] anyways using [layoutResId].
  * So, no point in using abstract var [VDB].
  * [layoutResId] will mostly different for each and every view class.
  * That's why, we have taken [VDB] as lateinit.
@@ -62,6 +73,8 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
         otherStuffs()
     }
 
+    abstract fun dataBinding(dataBinding: ViewDataBinding)
+
     abstract fun setObservers()
 
     /**
@@ -79,8 +92,6 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
     open fun getBindingVariable(): Int {
         return BR.viewModel
     }
-
-    abstract fun dataBinding(dataBinding: ViewDataBinding)
 
     abstract fun otherStuffs()
 }
