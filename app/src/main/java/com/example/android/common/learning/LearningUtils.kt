@@ -1,6 +1,7 @@
-package com.example.android.common.baseutils
+package com.example.android.common.learning
 
 import com.example.android.common.basedto.BaseUserInfo
+import com.example.android.common.learning.learnconstants.FinalInObjectDeclaration
 import java.util.*
 
 class LearningUtils : (Int, Int) -> Int {
@@ -176,6 +177,7 @@ class LearningUtils : (Int, Int) -> Int {
          * @since 1.0
          */
         doSomethingReturnUnit(3, 4) { a: Int, b: Int ->
+            FinalInObjectDeclaration.FINAL_CONSTANT
             println("printing from function literal")
             a + b
         }

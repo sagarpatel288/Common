@@ -61,6 +61,13 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
      * @since 1.0
      */
     abstract val viewModel: BVM
+
+    /**
+     * 6/13/2020
+     * [VDB]
+     * @author srdpatel
+     * @since 1.0
+     */
     private lateinit var dataBinding: VDB
 
     override fun onCreate(savedInstanceState: Bundle?) {

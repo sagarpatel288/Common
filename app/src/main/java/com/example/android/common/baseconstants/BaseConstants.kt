@@ -45,6 +45,7 @@ const val USER_ID: String = "user_id"
 const val LOGIN_ID: String = "login_id"
 const val LOGIN_TOKEN: String = "login_token"
 const val HAS_LOGGED_IN = "has_logged_in"
+const val PERMISSIONS = "permissions"
 
 object StaticConstants {
     var baseApiUrl = BASE_URL_GITHUB

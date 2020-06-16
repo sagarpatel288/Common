@@ -10,9 +10,10 @@ class PermissionActivity :
     BaseActivity<ActivityPermissionBinding, PermissionViewModel>(R.layout.activity_permission) {
 
     override val viewModel: PermissionViewModel by inject()
+    lateinit var dataBinding: ActivityPermissionBinding
 
     override fun dataBinding(dataBinding: ViewDataBinding) {
-
+        this.dataBinding = dataBinding as ActivityPermissionBinding
     }
 
     override fun setObservers() {

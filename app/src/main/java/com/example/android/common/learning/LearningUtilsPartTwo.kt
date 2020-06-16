@@ -1,4 +1,4 @@
-package com.example.android.common.baseutils
+package com.example.android.common.learning
 
 import com.example.android.common.basedto.BaseUserInfo
 
