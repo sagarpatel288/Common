@@ -45,5 +45,10 @@ class StaticInCompanionObjectClass {
          */
         @JvmField
         var jvmStaticExample = "jvmStaticExample"
+
+        @JvmStatic
+        fun jvmStaticMethod() = "jvmStaticMethod"
+
+        fun staticMethod() = "staticMethod"
     }
 }

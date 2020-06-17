@@ -3,6 +3,7 @@ package com.example.android.common.learning.learnconstants;
 import org.jetbrains.annotations.NotNull;
 
 import kotlin.jvm.JvmField;
+import kotlin.jvm.JvmStatic;
 import kotlin.jvm.internal.Intrinsics;
 
 /**
@@ -18,7 +19,6 @@ public final class StaticInObjectDeclarationJava {
      * 6/16/2020
      * singleton instance
      *
-     * @author srdpatel
      * @since 1.0
      */
     public static final StaticInObjectDeclarationJava INSTANCE; //singleton instance
@@ -27,7 +27,6 @@ public final class StaticInObjectDeclarationJava {
      * 6/16/2020
      * Note the {@code public} visibility modifier.
      *
-     * @author srdpatel
      * @since 1.0
      */
     @JvmField
@@ -38,7 +37,6 @@ public final class StaticInObjectDeclarationJava {
      * 6/16/2020
      * Note the {@code private} visibility modifier.
      *
-     * @author srdpatel
      * @since 1.0
      */
     @NotNull
@@ -71,6 +69,20 @@ public final class StaticInObjectDeclarationJava {
     private StaticInObjectDeclarationJava() {
     }
 
+    /**
+     * 6/17/2020
+     * {@code @JvmStatic} annotation makes the function accessible like a {@code static} method in Java.
+     *
+     * @author srdpatel
+     * @see <a href="https://kotlinlang.org/docs/reference/java-to-kotlin-interop.html#static-methods">Kotlin-Java interop</a>
+     * @since 1.0
+     */
+    @JvmStatic
+    @NotNull
+    public static final String jvmStaticMethod() {
+        return "jvmStaticMethod";
+    }
+
     //region Two additional methods (getter & setter) for private field staticExample
     @NotNull
     public final String getStaticExample() {
@@ -83,4 +95,16 @@ public final class StaticInObjectDeclarationJava {
     }
     //endregion
 
+    /**
+     * 6/17/2020
+     * A function without {@code @JvmStatic} annotation in an object declaration behaves like a {@code final} method in Java.
+     *
+     * @author srdpatel
+     * @see <a href="https://kotlinlang.org/docs/reference/java-to-kotlin-interop.html#static-methods">Java-Kotlin interop</a>
+     * @since 1.0
+     */
+    @NotNull
+    public final String staticMethod() {
+        return "staticMethod";
+    }
 }

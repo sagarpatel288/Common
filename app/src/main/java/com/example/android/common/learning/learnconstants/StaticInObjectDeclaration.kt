@@ -27,4 +27,16 @@ object StaticInObjectDeclaration {
      */
     @JvmField
     var jvmStaticExample = "jvmStaticExample"
+
+    /**
+     * 6/15/2020
+     * `@JvmField` to expose a field to Java callers. Available from Java!
+     * Use `@JvmStatic` to expose a static method to Java callers.
+     * @author srdpatel
+     * @since 1.0
+     */
+    @JvmStatic
+    fun jvmStaticMethod() = "jvmStaticMethod"
+
+    fun staticMethod() = "staticMethod"
 }
