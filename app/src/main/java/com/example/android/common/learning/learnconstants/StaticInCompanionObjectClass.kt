@@ -2,7 +2,7 @@ package com.example.android.common.learning.learnconstants
 
 /**
  * 6/16/2020
- * `companion object` also works like a static access in java.
+ * `companion object` works like a `static` access of java.
  * It is an `object declaration` inside a class.
  * Note that the `const` keyword is applicable to primitive data types and String only.
  * And We use `@JvmField` annotation for other (non-primitive) data types.
@@ -40,15 +40,30 @@ class StaticInCompanionObjectClass {
          * 6/16/2020
          * `@JvmField` to expose a field to Java callers. Available from Java!
          * Use `@JvmStatic` to expose a static method to Java callers.
+         *
          * @author srdpatel
          * @since 1.0
          */
         @JvmField
         var jvmStaticExample = "jvmStaticExample"
 
+        /**
+         * 6/16/2020
+         * Using `@JvmStatic` to expose a static method to Java callers.
+         *
+         * @author srdpatel
+         * @since 1.0
+         */
         @JvmStatic
         fun jvmStaticMethod() = "jvmStaticMethod"
 
+        /**
+         * 6/16/2020
+         * This method will not be available to java callers as it lacks `@JvmStatic` annotation.
+         *
+         * @author srdpatel
+         * @since 1.0
+         */
         fun staticMethod() = "staticMethod"
     }
 }

@@ -16,7 +16,7 @@ public final class CallingFromJava {
 
     /**
      * 6/16/2020
-     * Accessing java static like members of kotlin from java.
+     * Accessing java {@code static} like members of kotlin from java.
      * <p>
      * We can access {@link StaticInObjectDeclaration#jvmStaticExample} as it has {@code @JvmField} annotation.
      * But we cannot access {@link StaticInObjectDeclaration#staticExample} as it lacks {@code @JvmField} annotation.
@@ -39,7 +39,7 @@ public final class CallingFromJava {
 
     /**
      * 6/17/2020
-     * Accessing java static like members of kotlin companion object from java.
+     * Accessing java {@code static} like members of kotlin {@code companion object} from java.
      * We can access fields marked with {@code @JvmField} and methods marked with {@code @JvmStatic}.
      *
      * @author srdpatel
@@ -53,5 +53,20 @@ public final class CallingFromJava {
 
         String jvmStaticExample = StaticInCompanionObjectClass.jvmStaticExample;
         String jvmStaticMethodExample = StaticInCompanionObjectClass.jvmStaticMethod();
+    }
+
+    /**
+     * 6/18/2020
+     * Accessing java {@code public static final} like kotlin top-level members.
+     * We can access top-level members even those without having {@code @JvmField} annotation.
+     *
+     * @author srdpatel
+     * @since 1.0
+     */
+    private void accessVal() {
+        String topLevelVal = FinalValInClassKt.getTopLevelVal();
+        String constValOutsideClass = FinalValInClassKt.constValOutsideClass;
+        String jvmFieldValOutsideClass = FinalValInClassKt.jvmFieldValOutsideClass;
+        String topLevelFun = FinalValInClassKt.topLevelFun();
     }
 }

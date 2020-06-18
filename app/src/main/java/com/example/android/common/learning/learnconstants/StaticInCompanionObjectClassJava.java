@@ -26,6 +26,7 @@ public final class StaticInCompanionObjectClassJava {
      * ```
      * This is the static instance here through which we would call various instance methods like
      * {@link StaticInCompanionObjectClassJava.StaticInCompanionObject#jvmStaticMethod()}.
+     * (An additional resource)
      *
      * @see <a href="https://kotlinlang.org/docs/reference/object-declarations.html#companion-objects">Companion objects</a>
      * @since 1.0
@@ -35,6 +36,7 @@ public final class StaticInCompanionObjectClassJava {
     /**
      * 6/16/2020
      * Note the {@code public} visibility modifier.
+     * (As expected)
      *
      * @since 1.0
      */
@@ -45,6 +47,7 @@ public final class StaticInCompanionObjectClassJava {
     /**
      * 6/16/2020
      * Note the {@code private} visibility modifier.
+     * (As expected)
      *
      * @since 1.0
      */
@@ -59,11 +62,12 @@ public final class StaticInCompanionObjectClassJava {
      * (this method) that will call the actual method {@link StaticInCompanionObject#jvmStaticMethod()} which is inside of the companion object.
      * <p>
      * {@code @JvmStatic} annotation makes the function accessible like a {@code static} method in Java.
-     * However, kotlin compiler generates an instance method instead of a static method.
-     * So, this is the instance method for {@link StaticInCompanionObjectClassJava#StaticInCompanionObject}
+     * However, the kotlin compiler generates an instance method instead of a direct static method.
+     * So, this is the instance method for {@link StaticInCompanionObjectClassJava.StaticInCompanionObject}
      * that is generated for and will call {@link StaticInCompanionObjectClassJava.StaticInCompanionObject#jvmStaticMethod()}
      * <p>
-     * That's a way much complicated solution for a simple static method!
+     * That's a much complicated solution for a simple static method!
+     * (As expected but actually, more complex.)
      * </p>
      *
      * @author srdpatel
@@ -79,6 +83,7 @@ public final class StaticInCompanionObjectClassJava {
     /**
      * 6/17/2020
      * Kotlin compiler turns the companion object into a class like this.
+     * (An additional resource)
      *
      * @author srdpatel
      * @since 1.0
@@ -117,6 +122,8 @@ public final class StaticInCompanionObjectClassJava {
          * So, the {@code @JvmStatic} annotation for a method inside a companion object in kotlin actually
          * creates a static method {@link StaticInCompanionObjectClassJava#jvmStaticMethod()} outside the companion object class
          * which will call this instance method of the class {@link StaticInCompanionObjectClassJava.StaticInCompanionObject}.
+         * <p>
+         * (An additional resource)
          * </p>
          *
          * @author srdpatel
@@ -132,7 +139,7 @@ public final class StaticInCompanionObjectClassJava {
          * 6/17/2020
          * We didn't give the {@code @JvmStatic} annotation for this method in kotlin companion object.
          * Hence, We couldn't get a relevant static method that can call this method through
-         * the instance of this {@link StaticInCompanionObjectClassJava#StaticInCompanionObject} class.
+         * the instance of this {@link StaticInCompanionObjectClassJava.StaticInCompanionObject} class.
          *
          * @author srdpatel
          * @since 1.0
