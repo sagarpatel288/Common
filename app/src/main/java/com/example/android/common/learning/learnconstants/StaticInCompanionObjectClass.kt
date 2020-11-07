@@ -1,5 +1,29 @@
 package com.example.android.common.learning.learnconstants
 
+
+/**
+ * 6/19/2020
+ * <p>
+ * We use `var` for mutable property that can be re-assigned.
+ * <p>
+ * Top-level `var` is
+ * </p>
+ * @author srdpatel
+ * @since 1.0
+ */
+var varOutsideClass = "var outside the class, at top-level. Runtime value is allowed."
+
+/**
+ * 6/19/2020
+ * `@JvmField var` {@link #} []
+ *  []
+ * @author srdpatel
+ * @see <a href="http://google.com"></a>
+ * @since 1.0
+ */
+@JvmField
+var jvmVarOutsideClass = "jvmField var outside the class at top-level. Runtime value is allowed."
+
 /**
  * 6/16/2020
  * `companion object` works like a `static` access of java.

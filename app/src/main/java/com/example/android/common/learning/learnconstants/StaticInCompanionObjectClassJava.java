@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import kotlin.jvm.JvmField;
 import kotlin.jvm.JvmStatic;
-import kotlin.jvm.internal.DefaultConstructorMarker;
+/*import kotlin.jvm.internal.DefaultConstructorMarker;*/
 import kotlin.jvm.internal.Intrinsics;
 
 /**
@@ -31,7 +31,7 @@ public final class StaticInCompanionObjectClassJava {
      * @see <a href="https://kotlinlang.org/docs/reference/object-declarations.html#companion-objects">Companion objects</a>
      * @since 1.0
      */
-    public static final StaticInCompanionObjectClassJava.StaticInCompanionObject StaticInCompanionObject = new StaticInCompanionObjectClassJava.StaticInCompanionObject((DefaultConstructorMarker) null);
+    /*public static final StaticInCompanionObjectClassJava.StaticInCompanionObject StaticInCompanionObject = new StaticInCompanionObjectClassJava.StaticInCompanionObject((DefaultConstructorMarker) null);*/
 
     /**
      * 6/16/2020
@@ -77,7 +77,7 @@ public final class StaticInCompanionObjectClassJava {
     @JvmStatic
     @NotNull
     public static final String jvmStaticMethod() {
-        return StaticInCompanionObject.jvmStaticMethod();
+        return /*StaticInCompanionObject.jvmStaticMethod();*/ "";
     }
 
     /**

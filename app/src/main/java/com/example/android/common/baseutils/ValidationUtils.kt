@@ -131,5 +131,11 @@ class ValidationUtils {
             val regEx = Regex("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}")
             return email != null && email.isNotEmpty() && emailPattern.matcher(email).matches() && email.matches(regEx)
         }
+
+        @JvmStatic
+        fun testRegEx(){
+            val regEx = Regex("^_\\w+_$")
+            val reg2 = Regex("^[`][\\w]+[`]\$")
+        }
     }
 }

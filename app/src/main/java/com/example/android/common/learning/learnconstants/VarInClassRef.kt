@@ -45,9 +45,15 @@ var varOutOfClassAtTopLevel = "var out of class at top-level"
  * @author srdpatel
  * @since 1.0
  */
-class VarInClass {
+class VarInClassRef {
 
     var varInClass = someFunction()
+
+    private val varInClassObject = VarInClass()
+
+    fun accessPublicVar() {
+        varInClassObject.jvmFieldVarInClass
+    }
 
     @JvmField
     var jvmVarField = "jvmVarField ${someFunction()}"

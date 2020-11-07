@@ -14,6 +14,10 @@ package com.example.android.common.learning.learnconstants;
  */
 public final class CallingFromJava {
 
+    private void accessingTopLevelVar(){
+
+    }
+
     /**
      * 6/16/2020
      * Accessing java {@code static} like members of kotlin from java.
@@ -64,9 +68,64 @@ public final class CallingFromJava {
      * @since 1.0
      */
     private void accessVal() {
-        String topLevelVal = FinalValInClassKt.getTopLevelVal();
-        String constValOutsideClass = FinalValInClassKt.constValOutsideClass;
-        String jvmFieldValOutsideClass = FinalValInClassKt.jvmFieldValOutsideClass;
-        String topLevelFun = FinalValInClassKt.topLevelFun();
+
+        /*
+         * 6/19/2020
+         * [topLevelVal] is defined at top-level as:
+         * ```
+         * val topLevelVal = "top-level val"
+         * ```
+         * The original variable is private and we are accessing it using generated getter.
+         *
+         * @author srdpatel
+         * @since 1.0
+         */
+        String topLevelVal = ValInClassKt.getTopLevelVal();
+
+        /*
+         * 6/19/2020
+         * [constValOutsideClass] is defined at top-level as:
+         * ```
+         * const val constValOutsideClass = "a const val outside the class at top-level"
+         * ```
+         * We can access the kotlin top-level "const val" in java even if it lacks "@JvmField" annotation.
+         *
+         * @author srdpatel
+         * @since 1.0
+         */
+        String constValOutsideClass = ValInClassKt.constValOutsideClass;
+
+        /*
+         * 6/19/2020
+         * [jvmFieldValOutsideClass] is defined at top-level as:
+         * ```
+         * @JvmField
+         * val jvmFieldValOutsideClass = "jvmField val outside the class at top-level"
+         * ```
+         * @author srdpatel
+         * @since 1.0
+         */
+        String jvmFieldValOutsideClass = ValInClassKt.jvmFieldValOutsideClass;
+
+        /*
+         * 6/19/2020
+         * [topLevelFun] is defined at top-level as:
+         * ```
+         * fun topLevelFun() = "top-level function"
+         * ```
+         * @author srdpatel
+         * @since 1.0
+         */
+        String topLevelFun = ValInClassKt.topLevelFun();
+    }
+
+    private void accessVar() {
+        VarInClass varInClass = new VarInClass();
+        varInClass.getVarInClassCompileTime();
+        varInClass.setVarInClassCompileTime("from java setter: var in class: compile time");
+        varInClass.getVarInClassRunTime();
+        varInClass.setVarInClassRunTime("from java setter: var in class: run time");
+        varInClass.jvmFieldVarInClass = "new value from java";
+        varInClass.publicFun();
     }
 }

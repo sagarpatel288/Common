@@ -8,36 +8,73 @@ package com.example.android.common.learning.learnconstants
  */
 fun main() {
 
-    //region Accessing members of an object declaration
-    println(StaticInObjectDeclaration.staticExample + " " + StaticInObjectDeclaration.jvmStaticExample)
-    println(StaticInObjectDeclaration.staticMethod() + " " + StaticInObjectDeclaration.jvmStaticMethod())
+    //region Accessing `var` defined inside a class
+    val varInClass = VarInClass()
+    println(varInClass.varInClassCompileTime)
+    println(varInClass.varInClassRunTime)
+    println(varInClass.jvmFieldVarInClass)
+    println(varInClass.publicFun())
+    //endregion
+
+    //region Accessing top-level members
+
+    println(varOutsideClass)
+    println(jvmVarOutsideClass)
+
+    /**
+     * 6/19/2020
+     * [topLevelVal] is defined at top-level as:
+     * ```
+     * val topLevelVal = "top-level val"
+     * ```
+     *
+     * @author srdpatel
+     * @since 1.0
+     */
+    println(topLevelVal)
+
+    /**
+     * 6/19/2020
+     * [constValOutsideClass] is defined at top-level as:
+     * ```
+     * const val constValOutsideClass = "a const val outside the class at top-level"
+     * ```
+     * @author srdpatel
+     * @since 1.0
+     */
+    println(constValOutsideClass)
+
+    /**
+     * 6/19/2020
+     * [jvmFieldValOutsideClass] is defined at top-level as:
+     * ```
+     * @JvmField
+     * val jvmFieldValOutsideClass = "jvmField val outside the class at top-level"
+     * ```
+     * @author srdpatel
+     * @since 1.0
+     */
+    println(jvmFieldValOutsideClass)
+
+    /**
+     * 6/19/2020
+     * [topLevelFun] is defined at top-level as:
+     * ```
+     * fun topLevelFun() = "top-level function"
+     * ```
+     * @author srdpatel
+     * @since 1.0
+     */
+    println(topLevelFun())
     //endregion
 
     //region Accessing members of a companion object
     println(StaticInCompanionObjectClass.staticExample + " " + StaticInCompanionObjectClass.jvmStaticExample)
     println(StaticInCompanionObjectClass.staticMethod() + " " + StaticInCompanionObjectClass.jvmStaticMethod())
     //endregion
-}
 
-class CallingClass {
-
-    //region Accessing variables defined inside an object declaration
-    var refStaticInObjDeclaration = StaticInObjectDeclaration.staticExample
-    var refJvmStaticInObjDeclaration = StaticInObjectDeclaration.jvmStaticExample
-    //endregion
-
-    //region Accessing methods defined inside an object declaration
-    var refStaticMethodInObjDeclaration = StaticInObjectDeclaration.staticMethod()
-    var refJvmStaticMethodInObjDeclaration = StaticInObjectDeclaration.jvmStaticMethod()
-    //endregion
-
-    //region Accessing variables defined inside a companion object
-    var refStaticExample = StaticInCompanionObjectClass.staticExample
-    var refJvmStaticExample = StaticInCompanionObjectClass.jvmStaticExample
-    //endregion
-
-    //region Accessing methods defined inside a companion object
-    var refStaticMethod = StaticInCompanionObjectClass.staticMethod()
-    var refJvmStaticMethod = StaticInCompanionObjectClass.jvmStaticMethod()
+    //region Accessing members of an object declaration
+    println(StaticInObjectDeclaration.staticExample + " " + StaticInObjectDeclaration.jvmStaticExample)
+    println(StaticInObjectDeclaration.staticMethod() + " " + StaticInObjectDeclaration.jvmStaticMethod())
     //endregion
 }
