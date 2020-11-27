@@ -13,10 +13,6 @@ public /*static*/ class OuterInnerAccess {
         System.out.println("outer method");
     }
 
-    static class innerStaticClass {
-
-    }
-
     /*We can access private members of an inner class from the outer class*/
     public void accessInner() {
 
@@ -28,7 +24,18 @@ public /*static*/ class OuterInnerAccess {
     }
 
     private interface InterfaceEx {
-        
+
+    }
+
+    static class innerStaticClass {
+
+    }
+
+    /*We can define as many inner classes as we want.
+     *
+     * */
+    public abstract static class AbstractInner {
+
     }
 
     class InnerClass {
@@ -49,6 +56,4 @@ public /*static*/ class OuterInnerAccess {
             int staticInt = 10;
         }
     }
-
-    public abstract 
 }
