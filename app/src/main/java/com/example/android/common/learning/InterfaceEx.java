@@ -1,4 +1,4 @@
-package com.example.android.common.learning.learnconstants;
+package com.example.android.common.learning;
 
 interface InterfaceEx {
 

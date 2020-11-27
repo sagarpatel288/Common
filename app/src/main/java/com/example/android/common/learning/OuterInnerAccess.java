@@ -1,9 +1,36 @@
-package com.example.android.common.learning.learnconstants;
+package com.example.android.common.learning;
 
 /*outer class cannot be a static class*/
 public /*static*/ class OuterInnerAccess {
+
+    /**
+     * We can define the nested-static class as abstract.
+     */
+    public abstract static class AbstractStaticInner {
+
+    }
+
+    static String staticVar;
+    final String FINAL_STRING;
     int outPublic = 20;
     private int outPrivate = 10;
+    /*static final String STATIC_FINAL;*/ //Must be declared and defined before class loading is finished.
+
+    /**
+     * 11/9/2020 12:46
+     * <p>
+     * Initialization of a static and a final variable is possible inside a constructor but
+     * not for the static final variable.
+     *
+     * @author srdpatel
+     * @see <a href="http://oogle.com">a</a>
+     * @since a
+     */
+    public OuterInnerAccess() {
+        staticVar = "a static variable";
+        FINAL_STRING = "a final string";
+        /*STATIC_FINAL = "";*/
+    }
 
     public static void outerStatic() {
         System.out.println("A static method of an outer class");
@@ -31,10 +58,7 @@ public /*static*/ class OuterInnerAccess {
 
     }
 
-    /*We can define as many inner classes as we want.
-     *
-     * */
-    public abstract static class AbstractInner {
+    public abstract class AbstractInnerClass {
 
     }
 
