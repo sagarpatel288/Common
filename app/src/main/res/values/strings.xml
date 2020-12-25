@@ -34,4 +34,8 @@
     <string name="com_st_status">Status</string>
     <string name="com_st_enable">Enable</string>
     <string name="com_st_disable">Disable</string>
+    <string name="com_st_wifi_connected">WiFi Connected</string>
+    <string name="com_st_cellular_mobile_data">Cellular Data Connected</string>
+    <string name="com_st_no_internet">Internet is not available</string>
+    <string name="com_st_losing_connection">Losing the connection</string>
 </resources>

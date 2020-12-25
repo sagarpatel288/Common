@@ -1,12 +1,17 @@
 package com.example.android.common.baseapp
 
+import android.net.ConnectivityManager
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.example.android.common.BR
+import com.example.android.common.baselisteners.Callbacks
+import com.example.android.common.baseutils.ConnectivityProvider
 import com.example.android.common.baseviewmodels.BaseViewModel
+
 
 /**
  * 2/5/2020
@@ -49,7 +54,16 @@ import com.example.android.common.baseviewmodels.BaseViewModel
  * @since 1.0
  */
 abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutRes private val layoutResId: Int) :
-    AppCompatActivity() {
+    AppCompatActivity(), Callbacks.NetworkCallback {
+
+    // The BroadcastReceiver that tracks network connectivity changes.
+    private var manager: ConnectivityManager? = null
+    private var hasInternet: Boolean = false
+    private val networkRegistration: Callbacks.RegistrationCallback by lazy {
+        ConnectivityProvider.getConnectivityProvider(
+            this, this
+        )
+    }
 
     /**
      * 4/11/2020
@@ -72,6 +86,8 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Registers BroadcastReceiver to track network connection changes.
+        networkRegistration.onRegister()
         dataBinding = DataBindingUtil.setContentView(this, layoutResId)
         dataBinding.lifecycleOwner = this
         dataBinding.setVariable(getBindingVariable(), viewModel)
@@ -101,4 +117,19 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
     }
 
     abstract fun otherStuffs()
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Unregisters BroadcastReceiver when app is destroyed.
+        networkRegistration.onUnregister()
+    }
+
+    fun hasInternet(): Boolean {
+        return hasInternet
+    }
+
+    override fun onNetworkStateChange(hasInternet: Boolean) {
+        this.hasInternet = hasInternet
+        Log.d(" :BaseActivity: ", "onNetworkStateChange: $hasInternet: ")
+    }
 }
