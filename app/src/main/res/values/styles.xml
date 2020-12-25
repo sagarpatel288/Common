@@ -59,6 +59,14 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <!--When a title textView is beside an imageView as normally found in a list view for a user list-->
+    <style name="TvTitle.Beside">
+        <item name="android:layout_marginLeft">@dimen/com_dim_view_space_10</item>
+        <item name="android:layout_marginStart">@dimen/com_dim_view_space_10</item>
+        <item name="android:layout_marginRight">@dimen/com_dim_view_space_10</item>
+        <item name="android:layout_marginEnd">@dimen/com_dim_view_space_10</item>
+    </style>
+
     <!--Scrollable single line Title TextView-->
     <style name="TvTitle.Scrollable">
         <item name="android:ellipsize">marquee</item>

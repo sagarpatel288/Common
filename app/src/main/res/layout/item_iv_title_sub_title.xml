@@ -4,6 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--region Why an additional parent?-->
+    <!--An additional parent layout makes sure that irrespective of
+    margin and padding settings, we get full area for common operations
+     per cell/row such as ripple effect-->
+    <!--endregion-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lytItemParent"
         android:layout_width="match_parent"
@@ -43,11 +48,9 @@
 
             <TextView
                 android:id="@+id/v_tv_title"
-                style="@style/TvTitle"
+                style="@style/TvTitle.Beside"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/com_dim_app_space"
-                android:layout_marginLeft="@dimen/com_dim_app_space"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintLeft_toRightOf="@id/v_civ"
@@ -56,11 +59,17 @@
                 app:layout_constraintTop_toTopOf="@+id/v_civ"
                 />
 
+            <!--region Alignments-->
+            <!--Starting point is aligned with @v_tv_title and end alignment
+            is with respect to parent-->
+            <!--endregion-->
             <TextView
                 android:id="@+id/v_tv_sub_title"
                 style="@style/TvSubtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/com_dim_view_space_10"
+                android:layout_marginRight="@dimen/com_dim_view_space_10"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintLeft_toLeftOf="@id/v_tv_title"
