@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class BaseResponse(
+data class SampleResponse(
     var status: String = "",
     var message: String = "",
     val id: Int,

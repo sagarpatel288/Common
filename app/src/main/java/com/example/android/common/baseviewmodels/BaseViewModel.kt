@@ -22,7 +22,7 @@ abstract class BaseViewModel : ViewModel(), KoinComponent {
      * [Do not expose mutable data to view](https://proandroiddev.com/5-common-mistakes-when-using-architecture-components-403e9899f4cb "Best practices for MVVM")
      * @since 1.0
      */
-    private val state = MutableLiveData<BaseState>(BaseState.Idle)
+    private val state = MutableLiveData<BaseState>(BaseState.IDLE)
 
     /**
      * 4/11/2020

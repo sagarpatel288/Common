@@ -1,4 +1,4 @@
-package com.example.android.common.baserest
+package com.example.android.common.basenetworking
 
 import com.example.android.common.basedto.Weather
 import retrofit2.http.GET

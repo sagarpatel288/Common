@@ -28,7 +28,7 @@
  * THE SOFTWARE.
  */
 
-package com.example.android.common.baserest
+package com.example.android.common.basenetworking
 
 import com.example.android.common.basedto.RedditApiResponse
 import retrofit2.Call

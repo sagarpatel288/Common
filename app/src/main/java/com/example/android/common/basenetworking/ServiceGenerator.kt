@@ -1,4 +1,4 @@
-package com.example.android.common.baserest
+package com.example.android.common.basenetworking
 
 import com.example.android.common.BuildConfig
 import com.example.android.common.baseconstants.BASE_URL_GITHUB

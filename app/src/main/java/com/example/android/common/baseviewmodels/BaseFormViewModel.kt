@@ -7,7 +7,7 @@ import org.koin.core.KoinComponent
 
 open class BaseFormViewModel : BaseViewModel(), KoinComponent {
 
-    private val state : MutableLiveData<BaseState> = MutableLiveData(BaseState.Idle)
+    private val state : MutableLiveData<BaseState> = MutableLiveData(BaseState.IDLE)
 
     fun getState() : LiveData<BaseState> = state
 }

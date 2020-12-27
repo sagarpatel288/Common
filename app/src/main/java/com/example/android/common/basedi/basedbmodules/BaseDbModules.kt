@@ -2,7 +2,7 @@ package com.example.android.common.basedi.basedbmodules
 
 import androidx.room.Room
 import com.example.android.common.basedb.BaseDatabase
-import com.example.android.common.baserepository.BaseRepository
+import com.example.android.common.baserepository.SampleRepository
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
@@ -31,6 +31,6 @@ val baseDbModule = module {
     }
 
     single {
-        BaseRepository()
+        SampleRepository()
     }
 }

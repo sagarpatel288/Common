@@ -106,11 +106,11 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
     }
 
     open fun renderState(state: BaseState?) {
-        if (state is BaseState.Idle) {
+        if (state is BaseState.IDLE) {
             onIdle(state)
-        } else if (state is BaseState.Load || state is BaseState.Loading) {
+        } else if (state is BaseState.Load || state is BaseState.LOADING) {
             onLoading(state)
-        } else if (state is BaseState.Finished) {
+        } else if (state is BaseState.FINISHED) {
             onFinished(state)
         }
     }

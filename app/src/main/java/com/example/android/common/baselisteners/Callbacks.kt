@@ -1,7 +1,7 @@
 package com.example.android.common.baselisteners
 
 import android.content.Intent
-import com.example.android.common.basedto.BaseResponse
+import com.example.android.common.basedto.SampleResponse
 import com.example.android.common.basestate.BaseState
 
 abstract class Callbacks {
@@ -27,6 +27,6 @@ abstract class Callbacks {
     }
 
     interface ResponseCallback {
-        fun onResponse(response: BaseResponse, extra: Any?)
+        fun onResponse(response: SampleResponse, extra: Any?)
     }
 }
