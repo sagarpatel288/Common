@@ -1,7 +1,6 @@
 package com.example.android.common.baserepository
 
 import android.content.Context
-import com.example.android.common.basedb.basedao.BaseDao
 import com.example.android.common.basedb.basedao.CategoryDao
 import com.example.android.common.basedb.basedao.ProductDao
 import com.example.android.common.basedb.basedao.RankingDao
@@ -11,7 +10,6 @@ import com.example.android.ecommerce.model.*
 import org.koin.core.KoinComponent
 import org.koin.core.get
 import org.koin.core.inject
-import org.koin.core.parameter.parametersOf
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -23,10 +21,10 @@ import kotlin.collections.ArrayList
  *
  * @author srdpatel
  * @see <a href="https://github.com/probelalkhan/android-login-signup-tutorial">For BaseRepository</a>
+ * @see <a href="https://proandroiddev.com/lets-build-our-own-simplified-version-of-koin-19a887306258">Koin for generics</a>
  * @since 1.0
  */
 class BaseRepository : KoinComponent {
-    private val <T> baseDao: BaseDao<T> by inject ()
     private val categoryDao: CategoryDao by inject()
     private val productDao: ProductDao by inject()
     private val rankingDao: RankingDao by inject()

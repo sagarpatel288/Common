@@ -12,6 +12,7 @@ import org.koin.core.context.startKoin
 abstract class BaseApp : Application() {
 
     abstract fun setBaseUrl()
+    abstract fun setDi()
 
     override fun onCreate() {
         super.onCreate()
