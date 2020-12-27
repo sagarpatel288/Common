@@ -2,12 +2,12 @@ package com.example.android.common.baseviewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.android.common.basestate.StateLogInSignUpForm
+import com.example.android.common.basestate.BaseState
 import org.koin.core.KoinComponent
 
 open class BaseFormViewModel : BaseViewModel(), KoinComponent {
 
-    private val state : MutableLiveData<StateLogInSignUpForm> = MutableLiveData(StateLogInSignUpForm.InitialDefault)
+    private val state : MutableLiveData<BaseState> = MutableLiveData(BaseState.Idle)
 
-    fun getState() : LiveData<StateLogInSignUpForm> = state
+    fun getState() : LiveData<BaseState> = state
 }

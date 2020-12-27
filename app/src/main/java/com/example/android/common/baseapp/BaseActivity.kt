@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.example.android.common.BR
 import com.example.android.common.baselisteners.Callbacks
+import com.example.android.common.basestate.BaseState
 import com.example.android.common.baseutils.ConnectivityProvider
 import com.example.android.common.baseviewmodels.BaseViewModel
 
@@ -98,7 +99,21 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
 
     abstract fun dataBinding(dataBinding: ViewDataBinding)
 
-    abstract fun setObservers()
+    open fun setObservers(): Unit {
+        viewModel.state().observe(this) { state ->
+            renderState(state)
+        }
+    }
+
+    open fun renderState(state: BaseState?) {
+        if (state is BaseState.Idle) {
+            onIdle(state)
+        } else if (state is BaseState.Load || state is BaseState.Loading) {
+            onLoading(state)
+        } else if (state is BaseState.Finished) {
+            onFinished(state)
+        }
+    }
 
     /**
      * 4/11/2020
@@ -117,6 +132,10 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
     }
 
     abstract fun otherStuffs()
+    abstract fun onIdle(baseState: BaseState)
+    abstract fun onLoading(baseState: BaseState)
+    abstract fun onFinished(baseState: BaseState)
+    abstract fun onResult(result: BaseState)
 
     override fun onDestroy() {
         super.onDestroy()

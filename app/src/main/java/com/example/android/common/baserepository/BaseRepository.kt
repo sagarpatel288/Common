@@ -1,6 +1,7 @@
 package com.example.android.common.baserepository
 
 import android.content.Context
+import com.example.android.common.basedb.basedao.BaseDao
 import com.example.android.common.basedb.basedao.CategoryDao
 import com.example.android.common.basedb.basedao.ProductDao
 import com.example.android.common.basedb.basedao.RankingDao
@@ -10,10 +11,22 @@ import com.example.android.ecommerce.model.*
 import org.koin.core.KoinComponent
 import org.koin.core.get
 import org.koin.core.inject
+import org.koin.core.parameter.parametersOf
 import java.util.*
 import kotlin.collections.ArrayList
 
+/**
+ * 12/26/2020 18:38
+ * Here, we will have our baseDao and a common function to safely call apis.
+ * We have already got our {@link #BaseDao} [com.example.android.common.basedb.basedao.BaseDao].
+ * Similarly, we can use generics for our api calls also.
+ *
+ * @author srdpatel
+ * @see <a href="https://github.com/probelalkhan/android-login-signup-tutorial">For BaseRepository</a>
+ * @since 1.0
+ */
 class BaseRepository : KoinComponent {
+    private val <T> baseDao: BaseDao<T> by inject ()
     private val categoryDao: CategoryDao by inject()
     private val productDao: ProductDao by inject()
     private val rankingDao: RankingDao by inject()

@@ -9,12 +9,24 @@ import com.example.android.common.basedi.baseviewmodules.baseViewModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class BaseApp : Application() {
+abstract class BaseApp : Application() {
+
+    abstract fun setBaseUrl()
+
     override fun onCreate() {
         super.onCreate()
+        setBaseUrl()
         startKoin {
             androidContext(this@BaseApp)
-            modules(listOf(baseCoreModule, baseDbModule, baseViewModules, baseNetworkModule, baseSharePrefModule))
+            modules(
+                listOf(
+                    baseCoreModule,
+                    baseDbModule,
+                    baseViewModules,
+                    baseNetworkModule,
+                    baseSharePrefModule
+                )
+            )
         }
     }
 }

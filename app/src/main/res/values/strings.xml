@@ -38,4 +38,6 @@
     <string name="com_st_cellular_mobile_data">Cellular Data Connected</string>
     <string name="com_st_no_internet">Internet is not available</string>
     <string name="com_st_losing_connection">Losing the connection</string>
+    <string name="com_st_load_data">Load Data</string>
+    <string name="com_st_retry">Retry</string>
 </resources>
