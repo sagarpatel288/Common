@@ -13,7 +13,7 @@ data class BaseResponse<out T>(
 ) {
     companion object {
         fun <T> success(data: T?): BaseResponse<T> {
-            return BaseResponse(BaseState.SUCCESS, data, null, true, null, null)
+            return BaseResponse(BaseState.SUCCESS, data, null, null, null, null)
         }
 
         fun <T> error(
@@ -27,6 +27,10 @@ data class BaseResponse<out T>(
 
         fun <T> loading(data: T?): BaseResponse<T> {
             return BaseResponse(BaseState.LOADING, data, null, null, null, null)
+        }
+
+        fun <T> empty(msg: String): BaseResponse<T> {
+            return BaseResponse(BaseState.EMPTY, null, null, null, msg, null)
         }
     }
 }

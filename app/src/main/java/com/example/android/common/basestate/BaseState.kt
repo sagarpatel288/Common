@@ -1,6 +1,6 @@
 package com.example.android.common.basestate
 
-import com.example.android.common.basedto.SampleResponse
+import com.example.android.common.basenetworking.BaseResponse
 
 sealed class BaseState {
 
@@ -23,6 +23,7 @@ sealed class BaseState {
     object FINISHED : BaseState() //Fetched, Finished
     object SUCCESS : BaseState() //success, done, pass, positive
     object ERROR : BaseState() //fail, error, negative
+    object EMPTY : BaseState() //Empty
 
-    data class Result(val result: SampleResponse) : BaseState() //Response
+    data class Result(val result: BaseResponse<Any>) : BaseState() //Response
 }

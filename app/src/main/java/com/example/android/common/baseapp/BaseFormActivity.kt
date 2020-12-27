@@ -19,6 +19,6 @@ abstract class BaseFormActivity : BaseActivity<ViewDataBinding, BaseFormViewMode
     }
 
     override fun setObservers() {
-        viewModel.getState().observe(this, observer)
+        viewModel.state().observe(this, observer)
     }
 }

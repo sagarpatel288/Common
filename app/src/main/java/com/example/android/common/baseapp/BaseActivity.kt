@@ -55,7 +55,7 @@ import com.example.android.common.baseviewmodels.BaseViewModel
  * @since 1.0
  */
 abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutRes private val layoutResId: Int) :
-    AppCompatActivity(), Callbacks.NetworkCallback {
+    AppCompatActivity(), Callbacks.StatusCallback, Callbacks.NetworkCallback {
 
     // The BroadcastReceiver that tracks network connectivity changes.
     private var manager: ConnectivityManager? = null
@@ -93,22 +93,23 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
         dataBinding.lifecycleOwner = this
         dataBinding.setVariable(getBindingVariable(), viewModel)
         dataBinding(dataBinding)
+        beforeObserver()
         setObservers()
-        otherStuffs()
+        afterObserver()
+    }
+
+    open fun afterObserver() {
+
     }
 
     abstract fun dataBinding(dataBinding: ViewDataBinding)
 
-    open fun setObservers(): Unit {
-        viewModel.state().observe(this) { state ->
-            renderState(state)
-        }
-    }
+    open fun setObservers(): Unit = viewModel.state().observe(this) { state -> renderState(state) }
 
     open fun renderState(state: BaseState?) {
         if (state is BaseState.IDLE) {
             onIdle(state)
-        } else if (state is BaseState.Load || state is BaseState.LOADING) {
+        } else if (state is BaseState.LOAD || state is BaseState.LOADING) {
             onLoading(state)
         } else if (state is BaseState.FINISHED) {
             onFinished(state)
@@ -131,11 +132,7 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
         return BR.viewModel
     }
 
-    abstract fun otherStuffs()
-    abstract fun onIdle(baseState: BaseState)
-    abstract fun onLoading(baseState: BaseState)
-    abstract fun onFinished(baseState: BaseState)
-    abstract fun onResult(result: BaseState)
+    abstract fun beforeObserver()
 
     override fun onDestroy() {
         super.onDestroy()

@@ -20,8 +20,7 @@ class PermissionActivity :
 
     }
 
-    override fun otherStuffs() {
+    override fun beforeObserver() {
 
     }
-
 }

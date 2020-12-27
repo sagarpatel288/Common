@@ -7,10 +7,18 @@ import com.example.android.common.basestate.BaseState
 abstract class Callbacks {
 
     interface StatusCallback {
-        fun onIdle(baseState: BaseState)
-        fun onLoading(baseState: BaseState)
-        fun onFinished(baseState: BaseState)
-        fun onResult(result: BaseState)
+        fun onIdle(baseState: BaseState) {
+
+        }
+        fun onLoading(baseState: BaseState) {
+
+        }
+        fun onFinished(baseState: BaseState){
+
+        }
+        fun onResult(result: BaseState){
+
+        }
     }
 
     interface EventCallback {

@@ -50,6 +50,7 @@ val baseNetworkModule = module {
     /**
      * 12/27/2020 12:50
      * Factory instead of single because We need new instances every time.
+     *  []
      * @author srdpatel
      * @see <a href="http://google.com"></a>
      * @since 1.0
@@ -78,8 +79,7 @@ val baseNetworkModule = module {
     }
 }
 
-fun getApiService(retrofit: Retrofit): ApiOpenWeatherMap =
-    retrofit.create(ApiOpenWeatherMap::class.java)
+fun getApiService(retrofit: Retrofit): ApiOpenWeatherMap = retrofit.create(ApiOpenWeatherMap::class.java)
 
 fun <T> getApiService(retrofit: Retrofit, apiInterface: Class<T>): T = retrofit.create(apiInterface)
 

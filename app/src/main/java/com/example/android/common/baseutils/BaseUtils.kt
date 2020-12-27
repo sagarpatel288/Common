@@ -1,6 +1,9 @@
 package com.example.android.common.baseutils
 
+import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.telephony.PhoneNumberUtils
 import androidx.sqlite.db.SimpleSQLiteQuery
 import androidx.sqlite.db.SupportSQLiteQuery
@@ -110,6 +113,13 @@ class BaseUtils {
         @JvmStatic
         fun getCountryCode(): String {
             return PhoneNumberUtils.FORMAT_UNKNOWN.toString()
+        }
+
+        @JvmStatic
+        fun openInBrowser(context: Context, pageUrl: String?) {
+            pageUrl?.let {
+                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
+            }
         }
     }
 }

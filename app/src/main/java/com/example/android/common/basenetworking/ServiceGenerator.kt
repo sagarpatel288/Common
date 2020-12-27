@@ -1,6 +1,5 @@
 package com.example.android.common.basenetworking
 
-import com.example.android.common.BuildConfig
 import com.example.android.common.baseconstants.BASE_URL_GITHUB
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -41,10 +40,10 @@ class ServiceGenerator {
 
         @JvmStatic
         fun getOkHttpClient(): OkHttpClient {
-            if (BuildConfig.DEBUG && !okHttpClientBuilder.interceptors().contains(httpLoggingInterceptor)) {
+            /*if (BuildConfig.DEBUG && !okHttpClientBuilder.interceptors().contains(httpLoggingInterceptor)) {
                 httpLoggingInterceptor.level = (HttpLoggingInterceptor.Level.BODY)
                 okHttpClientBuilder.addInterceptor(httpLoggingInterceptor)
-            }
+            }*/
             return okHttpClientBuilder.build()
         }
 
