@@ -70,13 +70,13 @@ val baseNetworkModule = module {
      * [Parameterized Injection](https://github.com/InsertKoinIO/koin/blob/master/koin-projects/docs/reference/koin-core/injection-parameters.md "Parameterized Injection")
      * @since 1.0
      */
-    single { (baseUrl: String, apiInterface: Class<*>) ->
+    /*single { (baseUrl: String, apiInterface: Class<*>) ->
         getApiService(baseUrl, get(), apiInterface)
     }
 
     single { (apiInterface: Class<*>) ->
         getApiService(get(), apiInterface)
-    }
+    }*/
 }
 
 fun getApiService(retrofit: Retrofit): ApiOpenWeatherMap = retrofit.create(ApiOpenWeatherMap::class.java)
