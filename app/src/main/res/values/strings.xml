@@ -40,4 +40,9 @@
     <string name="com_st_losing_connection">Losing the connection</string>
     <string name="com_st_load_data">Load Data</string>
     <string name="com_st_retry">Retry</string>
+    <string name="com_st_cd_full_image_profile">Picture</string>
+    <string name="com_st_ic_minus">-</string>
+    <string name="com_st_ic_plus">+</string>
+    <string name="com_st_about">About</string>
+
 </resources>

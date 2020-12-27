@@ -20,4 +20,7 @@
     <string name="com_st_error_easy_password">Password must contain: One upper case letter, one lower case letter, one number and one symbol</string>
     <string name="com_st_error_empty_confirm_password">Please confirm the password</string>
     <string name="com_st_error_password_mismatch">"Password" and "confirm password" must be the same</string>
+    <string name="com_st_error_empty_data">No data found!</string>
+    <string name="com_st_error_something_went_wrong">something went wrong!</string>
+    <string name="com_st_error_aw_snap">Aw, Snap!</string>
 </resources>

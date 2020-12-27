@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <merge>
 
@@ -17,12 +16,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:text="@string/com_st_placeholder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/view_tv_no_data_sub_title"
@@ -31,12 +30,28 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/com_dim_app_space"
                 android:gravity="center"
+                android:text="@string/com_st_placeholder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view_tv_no_data_title"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/view_tv_no_data_title" />
+
+            <!--Order-->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/view_space_18"
+                android:text="@string/com_st_retry"
+                app:cornerRadius="@dimen/view_space_18"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_tv_no_data_sub_title"
+                app:rippleColor="@color/comColorWhite"
+                app:strokeColor="@color/comColorOrange" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </merge>
 </layout>

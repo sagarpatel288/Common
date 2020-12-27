@@ -1,16 +1,17 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar.Bridge">
         <!-- Customize your theme here. -->
         <!--color for toolbar, actionBar-->
-        <item name="colorPrimary">@color/design_default_color_primary</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
         <!--color for statusBar-->
-        <item name="colorPrimaryDark">@color/comColorTranslucentStatusbar</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <!--Color for checked and selected status for radioButton, checkBox etc...-->
-        <item name="colorAccent">@android:color/holo_purple</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- Customize your theme here. -->
         <!-- Background color of buttons in the app -->
-        <item name="colorButtonNormal">@color/design_default_color_primary</item>
+        <!--<item name="colorButtonNormal">@color/design_default_color_primary</item>-->
         <!--Checkboxes-->
         <item name="android:checkboxStyle">@style/MyCheckbox</item>
         <item name="checkboxStyle">@style/MyCheckbox</item>
