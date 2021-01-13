@@ -29,7 +29,7 @@ const val PRICE: String = "price"
 const val UNIT: String = "unit"
 const val REMAINING: String = "remaining"
 const val STATUS: String = "status"
-const val SUCCESS: String ="success"
+const val SUCCESS: String = "success"
 const val FAIL: String = "fail"
 const val TRUE: String = "true"
 const val FALSE: String = "false"
@@ -50,4 +50,6 @@ const val TAG = " :GitHub App: "
 
 object StaticConstants {
     var baseApiUrl = BASE_URL_GITHUB
+    var screenHeight = 0
+    var screenWidth = 0
 }

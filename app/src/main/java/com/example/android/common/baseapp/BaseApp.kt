@@ -1,6 +1,10 @@
 package com.example.android.common.baseapp
 
 import android.app.Application
+import android.util.DisplayMetrics
+
+
+
 
 abstract class BaseApp : Application() {
 
@@ -9,6 +13,7 @@ abstract class BaseApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        val displayMetrics = DisplayMetrics()
         setBaseUrl()
         setDi()
        /* startKoin {

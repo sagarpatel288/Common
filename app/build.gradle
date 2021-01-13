@@ -146,6 +146,7 @@ dependencies {
     //ThirdParties
     implementation 'com.mikhaellopez:circularimageview:4.2.0'
     implementation 'com.alexvasilkov:gesture-views:2.6.0'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // instrumentation tests
     androidTestImplementation "androidx.test.ext:junit:1.1.2"

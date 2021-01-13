@@ -1,13 +1,18 @@
 package com.example.android.common.baseapp
 
+import android.content.res.Resources
+import android.graphics.Point
 import android.net.ConnectivityManager
+import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.example.android.common.BR
+import com.example.android.common.baseconstants.StaticConstants
 import com.example.android.common.baselisteners.Callbacks
 import com.example.android.common.basestate.BaseState
 import com.example.android.common.baseutils.ConnectivityProvider
@@ -87,6 +92,7 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getScreenSize()
         // Registers BroadcastReceiver to track network connection changes.
         networkRegistration.onRegister()
         dataBinding = DataBindingUtil.setContentView(this, layoutResId)
@@ -96,6 +102,104 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
         beforeObserver()
         setObservers()
         afterObserver()
+    }
+
+    /**
+     * 1/4/2021 17:43
+     * Sets global constants for screen height and screen width
+     *
+     * @author srdpatel
+     * @since 1.0
+     */
+    private fun getScreenSize() {
+//        val display = context.getSystemService(Context.WINDOW_SERVICE).defaultDisplay
+        val displayMetrics = DisplayMetrics()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val display = display
+            display?.getRealMetrics(displayMetrics)
+        } else {
+            @Suppress("DEPRECATION")
+            val display = windowManager.defaultDisplay
+            @Suppress("DEPRECATION")
+            display.getMetrics(displayMetrics)
+        }
+
+        val displayMetricsHeightPixels = displayMetrics.heightPixels
+        val displayMetricsWidthPixels = displayMetrics.widthPixels
+
+        Log.d(
+            " :BaseActivity: ",
+            "getScreenSize: displayMetrics.heightPixels: $displayMetricsHeightPixels"
+        )
+        Log.d(
+            " :BaseActivity: ",
+            "getScreenSize: displayMetrics.widthPixels: $displayMetricsWidthPixels"
+        )
+
+        val size = Point()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            display?.getRealSize(size)
+        } else {
+            @Suppress("DEPRECATION")
+            display?.getSize(size)
+        }
+
+        val screenWidth: Int = size.x
+        val screenHeight: Int = size.y
+
+        Log.d(
+            " :BaseActivity: ",
+            "getScreenSize: displayMetrics.heightPixels: $screenWidth"
+        )
+        Log.d(
+            " :BaseActivity: ",
+            "getScreenSize: displayMetrics.widthPixels: $screenHeight"
+        )
+
+        StaticConstants.screenHeight = screenHeight
+        StaticConstants.screenWidth = screenWidth
+
+        /*if (hasNavigationBar(Resources.getSystem())) {
+            StaticConstants.screenHeight = displayMetrics.heightPixels + getNavigationBarHeight()
+        }*/
+    }
+
+    private fun hasNavigationBar(resources: Resources): Boolean {
+        val id: Int = resources.getIdentifier("config_showNavigationBar", "bool", "android")
+        return id > 0 && resources.getBoolean(id)
+    }
+
+    private fun getNavigationBarHeight(): Int {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            val displayMetrics = DisplayMetrics()
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val display = display
+                display?.getRealMetrics(displayMetrics)
+            } else {
+                @Suppress("DEPRECATION")
+                val display = windowManager.defaultDisplay
+                @Suppress("DEPRECATION")
+                display.getMetrics(displayMetrics)
+            }
+
+            val usableHeight = displayMetrics.heightPixels
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val display = display
+                display?.getRealMetrics(displayMetrics)
+            } else {
+                @Suppress("DEPRECATION")
+                val display = windowManager.defaultDisplay
+                @Suppress("DEPRECATION")
+                display.getMetrics(displayMetrics)
+            }
+
+            val realHeight = displayMetrics.heightPixels
+            return if (realHeight > usableHeight) realHeight - usableHeight else 0
+        }
+        return 0
     }
 
     open fun afterObserver() {

@@ -29,5 +29,7 @@ class ViewUtils {
         fun getView(context: Context, resLayId: Int): View {
             return LayoutInflater.from(context).inflate(resLayId, null)
         }
+
+
     }
 }
