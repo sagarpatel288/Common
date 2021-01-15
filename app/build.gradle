@@ -77,76 +77,18 @@ android {
     }
 }
 
-dependencies {
-    def life_cycle_version = "2.2.0"
-    def room_version = "2.2.6"
-    def koin_version = "2.0.1"
-    def retrofit = "2.6.2"
-    def okhttp_logging_interceptor = "4.2.2"
-    def kotlin_coroutines = "1.3.7"
+dependencies { configs ->
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    //Support
-    implementation 'com.android.support:multidex:1.0.3'
-
-    /*https://www.bignerdranch.com/blog/activity-and-fragment-layouts-with-androidx/*/
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    // this is needed to use the updated AppCompatActivity
-    implementation "androidx.activity:activity-ktx:1.1.0"
-    implementation 'androidx.fragment:fragment-ktx:1.2.5'
-
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-
-    implementation "com.google.android.material:material:1.2.1"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$life_cycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$life_cycle_version"
-    implementation "androidx.lifecycle:lifecycle-extensions:$life_cycle_version"
-//    kapt "androidx.lifecycle:lifecycle-compiler:$life_cycle_version"
-    kapt "androidx.lifecycle:lifecycle-common-java8:$life_cycle_version"
-    // For Kotlin use kapt instead of annotationProcessor
-
-    //Google
-    implementation 'com.google.code.gson:gson:2.8.6'
-
-    // Room
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
-    // For Kotlin use kapt instead of annotationProcessor
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation "androidx.room:room-ktx:$room_version"
-    // optional - RxJava support for Room
-    implementation "androidx.room:room-rxjava2:$room_version"
-    // optional - Guava support for Room, including Optional and ListenableFuture
-    implementation "androidx.room:room-guava:$room_version"
-
-    // Test helpers
-    testImplementation "androidx.room:room-testing:$room_version"
-
-    //Room debug db
-    debugApi 'com.amitshekhar.android:debug-db:1.0.6'
-
-    // Koin for Android
-    implementation "org.koin:koin-android:$koin_version"
-    // Koin Android ViewModel features
-    implementation "org.koin:koin-android-viewmodel:$koin_version"
-    // Koin Arch Components for Room
-//    implementation "org.koin:koin-android-architecture:$koin_version"
-
-    //Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines"
-
-    //Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$retrofit"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_interceptor"
-
-    //ThirdParties
-    implementation 'com.mikhaellopez:circularimageview:4.2.0'
-    implementation 'com.alexvasilkov:gesture-views:2.6.0'
-    implementation 'com.jakewharton.timber:timber:4.7.1'
+    kotlinSupport(configs)
+    androidLibs(configs)
+    threadLibs(configs)
+    lifeCycleLibs(configs)
+    roomDbLibs(configs)
+    diLibs(configs)
+    networkingLibs(configs)
+    thirdPartyLibs(configs)
 
     // instrumentation tests
     androidTestImplementation "androidx.test.ext:junit:1.1.2"
@@ -159,3 +101,110 @@ dependencies {
     testImplementation "org.mockito:mockito-core:3.1.0"
     testImplementation "androidx.arch.core:core-testing:2.1.0"
 }
+
+//Kotlin support
+void kotlinSupport(configs) {
+
+    //Kotlin support
+    configs.implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.ext.kotlin_version"
+}
+
+//Native android libs
+static void androidLibs(configs) {
+
+    //Support
+    configs.implementation 'com.android.support:multidex:1.0.3'
+    /*https://www.bignerdranch.com/blog/activity-and-fragment-layouts-with-androidx/*/
+    configs.implementation 'androidx.appcompat:appcompat:1.2.0'
+    // this is needed to use the updated AppCompatActivity
+    configs.implementation "androidx.activity:activity-ktx:1.1.0"
+    configs.implementation 'androidx.fragment:fragment-ktx:1.2.5'
+    configs.implementation 'androidx.core:core-ktx:1.3.2'
+    configs.implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    configs.implementation "com.google.android.material:material:1.2.1"
+}
+
+//Thread libs
+static void threadLibs(configs) {
+
+    def kotlin_coroutines = "1.3.7"
+
+    //Coroutines
+    configs.implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines"
+    configs.implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines"
+}
+
+//Life cycle libs
+static void lifeCycleLibs(configs) {
+
+    def life_cycle_version = "2.2.0"
+
+    configs.implementation "androidx.lifecycle:lifecycle-livedata-ktx:$life_cycle_version"
+    configs.implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$life_cycle_version"
+    configs.implementation "androidx.lifecycle:lifecycle-extensions:$life_cycle_version"
+//    kapt "androidx.lifecycle:lifecycle-compiler:$life_cycle_version"
+    configs.kapt "androidx.lifecycle:lifecycle-common-java8:$life_cycle_version"
+    // For Kotlin use kapt instead of annotationProcessor
+}
+
+//Room db libs
+static void roomDbLibs(configs) {
+
+    def room_version = "2.2.6"
+
+    // Room
+    configs.implementation "androidx.room:room-runtime:$room_version"
+    configs.kapt "androidx.room:room-compiler:$room_version"
+    // For Kotlin use kapt instead of annotationProcessor
+    // optional - Kotlin Extensions and Coroutines support for Room
+    configs.implementation "androidx.room:room-ktx:$room_version"
+    // optional - RxJava support for Room
+    configs.implementation "androidx.room:room-rxjava2:$room_version"
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    configs.implementation "androidx.room:room-guava:$room_version"
+
+    // Test helpers
+    configs.testImplementation "androidx.room:room-testing:$room_version"
+
+    //Room debug db
+    configs.debugApi 'com.amitshekhar.android:debug-db:1.0.6'
+}
+
+//Dependency Injection
+static void diLibs(configs) {
+
+    def koin_version = "2.0.1"
+
+    // Koin for Android
+    configs.implementation "org.koin:koin-android:$koin_version"
+    // Koin Android ViewModel features
+    configs.implementation "org.koin:koin-android-viewmodel:$koin_version"
+    // Koin Arch Components for Room
+//    implementation "org.koin:koin-android-architecture:$koin_version"
+}
+
+//Retrofit, Networking, Parsing Libs
+static void networkingLibs(configs) {
+
+    def retrofit = "2.6.2"
+    def okhttp_logging_interceptor = "4.2.2"
+
+    //Google
+    configs.implementation 'com.google.code.gson:gson:2.8.6'
+
+    //Retrofit
+    configs.implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    configs.implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    configs.implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_interceptor"
+}
+
+//Third party libs
+static void thirdPartyLibs(configs) {
+
+    //ThirdParties, External, Extra libs
+    configs.implementation 'com.mikhaellopez:circularimageview:4.2.0'
+    configs.implementation 'com.alexvasilkov:gesture-views:2.6.0'
+    configs.implementation 'com.jakewharton.timber:timber:4.7.1'
+}
+
+
