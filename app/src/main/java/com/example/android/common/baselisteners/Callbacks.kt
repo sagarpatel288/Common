@@ -37,4 +37,19 @@ abstract class Callbacks {
     interface ResponseCallback {
         fun onResponse(response: SampleResponse, extra: Any?)
     }
+
+    /**
+     * Interface callback from [MyAlertDialog] to host
+     *
+     *
+     * Gives callback to host for whether [MyAlertDialog.btnLeft] or [MyAlertDialog.btnRight] has clicked
+     *
+     *
+     *
+     * @since 1.0
+     */
+    interface OnDialogBtnClick {
+        fun onLeftBtnClick()
+        fun onRightBtnClick()
+    }
 }

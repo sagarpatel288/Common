@@ -23,7 +23,8 @@ sealed class BaseState {
     object FINISHED : BaseState() //Fetched, Finished
     object SUCCESS : BaseState() //success, done, pass, positive
     object ERROR : BaseState() //fail, error, negative
-    object EMPTY : BaseState() //Empty
+    object EMPTY : BaseState() //Empty, No data at all
+    object NO_SEARCH_RESULT : BaseState() // search result is empty. No matching search result.
 
     data class Result(val result: BaseResponse<Any>) : BaseState() //Response
 }

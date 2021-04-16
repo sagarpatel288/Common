@@ -1,5 +1,6 @@
 package com.example.android.common.baseutils
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Point
@@ -79,6 +80,20 @@ class ScreenUtils {
         }*/
 
             return mutableListOf<Int>(StaticConstants.screenHeight, StaticConstants.screenWidth)
+        }
+
+        /**
+         * Gives an int array which will have width and height of screen respectively
+         *
+         * @since 1.0
+         */
+        @JvmStatic
+        fun getScreenWidthHeight(activity: Activity): IntArray? {
+            val displayMetrics = DisplayMetrics()
+            activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
+            val height = displayMetrics.heightPixels
+            val width = displayMetrics.widthPixels
+            return intArrayOf(width, height)
         }
 
         @JvmStatic

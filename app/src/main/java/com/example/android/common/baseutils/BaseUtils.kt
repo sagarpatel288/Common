@@ -5,6 +5,10 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.telephony.PhoneNumberUtils
+import androidx.annotation.Nullable
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
 import androidx.sqlite.db.SimpleSQLiteQuery
 import androidx.sqlite.db.SupportSQLiteQuery
 import com.example.android.common.baseconstants.HAS_LOGGED_IN
@@ -120,6 +124,23 @@ class BaseUtils {
             pageUrl?.let {
                 context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
             }
+        }
+
+        /**
+         * A [LifecycleOwner] is considered active if it is either STARTED or RESUMED.
+         *
+         * @param lifecycleOwner to check the state of.
+         * @return whether the lifecycleOwner is active.
+         */
+        fun isInActiveState(@Nullable lifecycleOwner: LifecycleOwner?): Boolean {
+            return (lifecycleOwner != null
+                    && lifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
+                    && lifecycleOwner.lifecycle.currentState != Lifecycle.State.DESTROYED
+                    )
+        }
+
+        fun isSafeFragment(frag: Fragment): Boolean {
+            return !(frag.isRemoving || frag.activity == null || frag.isDetached || !frag.isAdded || frag.view == null)
         }
     }
 }

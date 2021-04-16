@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/baseFragment">
+
+    <fragment
+        android:id="@+id/baseFragment"
+        android:name="com.example.android.common.baseapp.BaseFragment"
+        android:label="BaseFragment" >
+        <action
+            android:id="@+id/action_baseFragment_to_comSignUpFragment"
+            app:destination="@id/comSignUpFragment" />
+        <action
+            android:id="@+id/action_baseFragment_to_comSignUpFragment2"
+            app:destination="@id/comSignUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/comSignUpFragment"
+        android:name="com.example.android.common.nav.ComSignUpFragment"
+        android:label="ComSignUpFragment" >
+        <action
+            android:id="@+id/action_comSignUpFragment_to_comSignInFragment"
+            app:destination="@id/comSignInFragment" />
+        <action
+            android:id="@+id/action_comSignUpFragment_to_comSignInFragment2"
+            app:destination="@id/comSignInFragment" />
+        <action
+            android:id="@+id/action_comSignUpFragment_to_comSignInFragment3"
+            app:destination="@id/comSignInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/comSignInFragment"
+        android:name="com.example.android.common.nav.ComSignInFragment"
+        android:label="ComSignInFragment" >
+        <action
+            android:id="@+id/action_comSignInFragment_to_comProfileFragment"
+            app:destination="@id/comProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/comProfileFragment"
+        android:name="com.example.android.common.nav.ComProfileFragment"
+        android:label="ComProfileFragment" />
+</navigation>

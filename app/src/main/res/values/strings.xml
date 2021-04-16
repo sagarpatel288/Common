@@ -44,5 +44,8 @@
     <string name="com_st_ic_minus">-</string>
     <string name="com_st_ic_plus">+</string>
     <string name="com_st_about">About</string>
-
+    <string name="com_st_start">Start</string>
+    <string name="com_st_stop">Stop</string>
+    <string name="com_st_pause">Pause</string>
+    <string name="com_st_play">Play</string>
 </resources>

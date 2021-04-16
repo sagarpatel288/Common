@@ -16,7 +16,7 @@ package com.example.android.common.baseconstants
  * @since 1.0
  */
 sealed class ViewType(viewType: Int) {
-    object ViewTypeItem : ViewType(100)
-    object ViewTypeLoading : ViewType(110)
+    data class ViewTypeItem(val viewType: Int) : ViewType(100)
+    data class ViewTypeLoading(val viewType: Int) : ViewType(110)
     object ViewTypeShimmer : ViewType(120)
 }

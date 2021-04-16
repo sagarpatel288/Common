@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--Note: when defining the directory path, it has to be matched with the one we define in file_paths.-->
+
+    <!--You must specify a child element of <paths> for each directory that contains files for which you want content URIs.
+    For example, these XML elements specify two directories:-->
+    <files-path name="my_images" path="images/"/>
+    <files-path name="my_docs" path="docs/"/>
+
+    <!--Represents files in the root of your app's external storage area.
+    The root path of this subdirectory is the same as the value returned by Context#getExternalFilesDir(String) Context.getExternalFilesDir(null).-->
+    <external-files-path name="name" path="path" />
+    <external-files-path name="name" path="." />
+
+    <!--external-files-path is equivalent to context.getExternalFileDirs-->
+    <!--Below tag indicates that we want to have access for "Pictures" directory of context.getExternalFileDirs-->
+    <!--getExternalStoragePublicDirectory() and DIRECTORY_PICTURES -->
+    <!--val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)-->
+    <external-files-path name="my_images" path="Pictures" />
+
+    <!--Represents files in the root of the external storage area.
+    The root path of this subdirectory is the same as the value returned by Environment.getExternalStorageDirectory().-->
+    <external-path name="name" path="path" />
+    <external-path name="name" path="." />
+
+    <!--Represents files in the root of your app's external media area.
+    The root path of this subdirectory is the same as the value returned by the first result of Context.getExternalMediaDirs().
+    Note: this directory is only available on API 21+ devices.-->
+    <external-media-path name="name" path="path" />
+    <external-media-path name="name" path="." />
+
+    <!--Represents files in the root of your app's external cache area.
+    The root path of this subdirectory is the same as the value returned by Context.getExternalCacheDir().-->
+    <external-cache-path name="name" path="path" />
+    <external-cache-path name="name" path="." />
+
+    <!--Represents files in the files/ subdirectory of your app's internal storage area.
+    This subdirectory is the same as the value returned by Context.getFilesDir().-->
+    <files-path name="name" path="path" />
+    <files-path name="name" path="." />
+
+    <!--Represents files in the cache subdirectory of your app's internal storage area.
+    The root path of this subdirectory is the same as the value returned by getCacheDir().-->
+    <cache-path name="name" path="path" />
+    <cache-path name="name" path="." />
+
+
+</paths>

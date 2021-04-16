@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.android.common.basestate.BaseState
 import org.koin.core.KoinComponent
 
+/*add dependency and use ViewModel(state: SavedStateHandle) to survive process death*/
 abstract class BaseViewModel : ViewModel(), KoinComponent {
 
     /**
@@ -39,4 +40,37 @@ abstract class BaseViewModel : ViewModel(), KoinComponent {
      * @since 1.0
      */
     fun state(): LiveData<BaseState> = state
+
+    /**
+     * 2/18/2021 19:34
+     * <p>
+     * We keep the mutable live data private and in order to access it,
+     * we use another property [someLiveData], make it liveData instead of mutableLiveData and
+     * override its getter method to return our mutableLiveData.
+     * </p>
+     * @author srdpatel
+     * @since 1.0.0
+     */
+    private var someMutableLiveData = MutableLiveData<String>()
+
+    /**
+     * 2/18/2021 23:01
+     * We use this kind of public live data for one way binding or observation.
+     *
+     * @author srdpatel
+     * @since 1.0.0
+     */
+    val someLiveData: LiveData<String>
+        get() = someMutableLiveData
+
+    /**
+     * 2/18/2021 22:54
+     * Live data for two way data binding must be mutable and public like this [twoWayDataBinding].
+     * Live data for one way data binding can be immutable and public just like [someLiveData].
+     * We can bind [twoWayDataBinding] to an edit text.
+     *
+     * @author srdpatel
+     * @since 1.0.0
+     */
+    val twoWayDataBinding = MutableLiveData<String>()
 }

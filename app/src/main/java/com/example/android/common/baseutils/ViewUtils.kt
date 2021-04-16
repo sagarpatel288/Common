@@ -3,6 +3,7 @@ package com.example.android.common.baseutils
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class ViewUtils {
@@ -30,6 +31,10 @@ class ViewUtils {
             return LayoutInflater.from(context).inflate(resLayId, null)
         }
 
-
+        @JvmStatic
+        fun hideSoftKeyboard(context: Context, view: View) {
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 }

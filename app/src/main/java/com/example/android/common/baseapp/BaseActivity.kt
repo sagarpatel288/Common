@@ -12,11 +12,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.example.android.common.BR
+import com.example.android.common.baseconstants.LOG
 import com.example.android.common.baseconstants.StaticConstants
 import com.example.android.common.baselisteners.Callbacks
 import com.example.android.common.basestate.BaseState
+import com.example.android.common.baseutils.ConnectionLiveData
 import com.example.android.common.baseutils.ConnectivityProvider
 import com.example.android.common.baseviewmodels.BaseViewModel
+import timber.log.Timber
 
 
 /**
@@ -64,6 +67,9 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
 
     // The BroadcastReceiver that tracks network connectivity changes.
     private var manager: ConnectivityManager? = null
+    private val connectionLiveDataBinding: ConnectionLiveData by lazy {
+        ConnectionLiveData(this)
+    }
     private var hasInternet: Boolean = false
     private val networkRegistration: Callbacks.RegistrationCallback by lazy {
         ConnectivityProvider.getConnectivityProvider(
@@ -90,18 +96,91 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
      */
     private lateinit var dataBinding: VDB
 
+    /**
+     * 2/20/2021 11:37
+     * <p>
+     * [ConnectivityProvider] implements [Callbacks.RegistrationCallback].
+     * We are calling abstract methods of [Callbacks.RegistrationCallback] in [BaseActivity] here
+     * to register or unregister event listening (receiver) of network change via [networkRegistration].
+     * </p>
+     * To detect network changes, we have used [networkRegistration].
+     * [networkRegistration] is an interface [Callbacks.RegistrationCallback] that we are getting
+     * through [ConnectivityProvider] because [ConnectivityProvider] uses different APIs
+     * for the backward compatibility to give proper network changes.
+     * </p>
+     * [ConnectivityProvider] implements [Callbacks.RegistrationCallback].
+     * </p>
+     * [ConnectivityProvider] is a singleton class that uses [android.content.Context] and
+     * [Callbacks.NetworkCallback] to give network changes.
+     * </p>
+     * So, [ConnectivityProvider] is giving (a way, bridge to reach and trigger (call)) the implementation of an interface
+     * [Callbacks.RegistrationCallback] and on the other hand, it takes the [Callbacks.NetworkCallback] interface
+     * implementation itself so that it can call its method [Callbacks.NetworkCallback.onNetworkStateChange] accordingly.
+     * </p>
+     * Based on device version, [ConnectivityProvider] gives [Callbacks.RegistrationCallback]
+     * that we are using here in form of [networkRegistration] via either
+     * [com.example.android.common.baseutils.NetworkCallback] or via
+     * [com.example.android.common.baseutils.NetworkReceiver].
+     * </p>
+     * That means, both [com.example.android.common.baseutils.NetworkCallback] and
+     * [com.example.android.common.baseutils.NetworkReceiver] also returns
+     * [Callbacks.RegistrationCallback] which we are getting via [ConnectivityProvider]
+     * in form of [networkRegistration].
+     * </p>
+     * If device version is N (7) or above, we are getting [networkRegistration]
+     * through [com.example.android.common.baseutils.NetworkCallback] otherwise
+     * through [com.example.android.common.baseutils.NetworkReceiver].
+     * </p>
+     * So, based on device version, wherever we have implemented our [networkRegistration]
+     * interface, either in [com.example.android.common.baseutils.NetworkReceiver] or in
+     * [com.example.android.common.baseutils.NetworkCallback], we will call (use) it from
+     * here, the [BaseActivity] and we will call [Callbacks.RegistrationCallback.onRegister]
+     * in [onCreate] and [Callbacks.RegistrationCallback.onUnregister] in [onDestroy], [onPause]
+     * or in [onStop].
+     * </p>
+     * This is the benefit of casting to interface and using them without exposing anything else
+     * that the underlying object or class has.
+     * </p>
+     * What we care is [Callbacks.RegistrationCallback.onRegister] and [Callbacks.RegistrationCallback.onUnregister]
+     * and what we do not care is in knowing who implements [Callbacks.RegistrationCallback] and anything else
+     * about whoever implements [Callbacks.RegistrationCallback].
+     * </p>
+     * For example, `interface I` has `doIStuff`, `class A: I`, `class B: I`
+     * and now we want to call `doIStuff` from `class C` without exposing irrelevant things
+     * of any class that implements `interface I`. We don't need more, there is no need to have
+     * the whole `class A` or `class B`. We are very specific here and it is known as
+     * interface segregation principle.
+     * </p>
+     * For more information on SOLID and interface segregation, please check the provided links.
+     * </p>
+     *
+     *
+     * </p>
+     * @author srdpatel
+     * [InterfaceSegregationPrinciple] (https://en.wikipedia.org/wiki/Interface_segregation_principle "Interface segregation principle")
+     * [SOLID Stackify](https://stackify.com/interface-segregation-principle/ "SOLID Stackify")
+     * @since 1.0.0
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getScreenSize()
+        // comment by srdpatel: 2/20/2021 `networkRegistration` has been initialized lazy.
         // Registers BroadcastReceiver to track network connection changes.
         networkRegistration.onRegister()
         dataBinding = DataBindingUtil.setContentView(this, layoutResId)
         dataBinding.lifecycleOwner = this
         dataBinding.setVariable(getBindingVariable(), viewModel)
         dataBinding(dataBinding)
+        observeInternetAvailability()
         beforeObserver()
         setObservers()
         afterObserver()
+    }
+
+    private fun observeInternetAvailability() {
+        connectionLiveDataBinding.observe(this) {
+            onNetworkStateChange(it)
+        }
     }
 
     /**
@@ -240,7 +319,7 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
 
     override fun onDestroy() {
         super.onDestroy()
-        // Unregisters BroadcastReceiver when app is destroyed.
+        // Unregisters BroadcastReceiver when app is destroyed or during onPause?.
         networkRegistration.onUnregister()
     }
 
@@ -248,8 +327,77 @@ abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
         return hasInternet
     }
 
+    /**
+     * 2/20/2021 11:37
+     * <p>
+     * [ConnectivityProvider] implements [Callbacks.RegistrationCallback].
+     * We are calling abstract methods of [Callbacks.RegistrationCallback] in [BaseActivity] here
+     * to register or unregister event listening (receiver) of network change via [networkRegistration].
+     * </p>
+     * This method [onNetworkStateChange] is from interface [Callbacks.NetworkCallback] that we have implemented in this [BaseActivity].
+     * This method [onNetworkStateChange] gives [Boolean] value [hasInternet] whenever there is
+     * a change in the state of network like from internet to no internet or vice versa.
+     * </p>
+     * To detect these kind of network changes, we have used [networkRegistration].
+     * [networkRegistration] is an interface [Callbacks.RegistrationCallback] that we are getting
+     * through [ConnectivityProvider] because [ConnectivityProvider] uses different APIs
+     * for the backward compatibility to give proper network changes.
+     * </p>
+     * [ConnectivityProvider] implements [Callbacks.RegistrationCallback].
+     * </p>
+     * [ConnectivityProvider] is a singleton class that uses [android.content.Context] and
+     * [Callbacks.NetworkCallback] to give network changes.
+     * </p>
+     * So, [ConnectivityProvider] is giving (a way, bridge to reach and trigger (call)) the implementation of an interface
+     * [Callbacks.RegistrationCallback] and on the other hand, it takes the [Callbacks.NetworkCallback] interface
+     * implementation itself so that it can call its method [Callbacks.NetworkCallback.onNetworkStateChange] accordingly.
+     * </p>
+     * Based on device version, [ConnectivityProvider] gives [Callbacks.RegistrationCallback]
+     * that we are using here in form of [networkRegistration] via either
+     * [com.example.android.common.baseutils.NetworkCallback] or via
+     * [com.example.android.common.baseutils.NetworkReceiver].
+     * </p>
+     * That means, both [com.example.android.common.baseutils.NetworkCallback] and
+     * [com.example.android.common.baseutils.NetworkReceiver] also returns
+     * [Callbacks.RegistrationCallback] which we are getting via [ConnectivityProvider]
+     * in form of [networkRegistration].
+     * </p>
+     * If device version is N (7) or above, we are getting [networkRegistration]
+     * through [com.example.android.common.baseutils.NetworkCallback] otherwise
+     * through [com.example.android.common.baseutils.NetworkReceiver].
+     * </p>
+     * So, based on device version, wherever we have implemented our [networkRegistration]
+     * interface, either in [com.example.android.common.baseutils.NetworkReceiver] or in
+     * [com.example.android.common.baseutils.NetworkCallback], we will call (use) it from
+     * here, the [BaseActivity] and we will call [Callbacks.RegistrationCallback.onRegister]
+     * in [onCreate] and [Callbacks.RegistrationCallback.onUnregister] in [onDestroy], [onPause]
+     * or in [onStop].
+     * </p>
+     * This is the benefit of casting to interface and using them without exposing anything else
+     * that the underlying object or class has.
+     * </p>
+     * What we care is [Callbacks.RegistrationCallback.onRegister] and [Callbacks.RegistrationCallback.onUnregister]
+     * and what we do not care is in knowing who implements [Callbacks.RegistrationCallback] and anything else
+     * about whoever implements [Callbacks.RegistrationCallback].
+     * </p>
+     * For example, `interface I` has `doIStuff`, `class A: I`, `class B: I`
+     * and now we want to call `doIStuff` from `class C` without exposing irrelevant things
+     * of any class that implements `interface I`. We don't need more, there is no need to have
+     * the whole `class A` or `class B`. We are very specific here and it is known as
+     * interface segregation principle.
+     * </p>
+     * For more information on SOLID and interface segregation, please check the provided links.
+     * </p>
+     *
+     *
+     * </p>
+     * @author srdpatel
+     * [InterfaceSegregationPrinciple] (https://en.wikipedia.org/wiki/Interface_segregation_principle "Interface segregation principle")
+     * [SOLID Stackify](https://stackify.com/interface-segregation-principle/ "SOLID Stackify")
+     * @since 1.0.0
+     */
     override fun onNetworkStateChange(hasInternet: Boolean) {
         this.hasInternet = hasInternet
-        Log.d(" :BaseActivity: ", "onNetworkStateChange: $hasInternet: ")
+        Timber.d(" :$LOG: BaseActivity: :onNetworkStateChange: $hasInternet")
     }
 }

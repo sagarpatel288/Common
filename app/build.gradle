@@ -1,9 +1,11 @@
 //apply plugin: 'com.android.application'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-android-extensions'
 //To enable the kotlin annotation processor tool apply plugin: ‘kotlin-kapt’ to the top of the app gradle file
 apply plugin: "kotlin-kapt"
+apply plugin: "kotlin-parcelize"
+apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion 30
@@ -75,6 +77,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies { configs ->
@@ -83,6 +89,7 @@ dependencies { configs ->
 
     kotlinSupport(configs)
     androidLibs(configs)
+    navigationLibs(configs)
     threadLibs(configs)
     lifeCycleLibs(configs)
     roomDbLibs(configs)
@@ -124,6 +131,27 @@ static void androidLibs(configs) {
     configs.implementation "com.google.android.material:material:1.2.1"
 }
 
+static void navigationLibs(configs) {
+    def nav_version = "2.3.3"
+
+    // Java language implementation
+    configs.implementation "androidx.navigation:navigation-fragment:$nav_version"
+    configs.implementation "androidx.navigation:navigation-ui:$nav_version"
+
+    // Kotlin
+    configs.implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    configs.implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // Feature module Support
+    configs.implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
+
+    // Testing Navigation
+    configs.androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
+
+    // Jetpack Compose Integration
+    configs.implementation "androidx.navigation:navigation-compose:1.0.0-alpha07"
+}
+
 //Thread libs
 static void threadLibs(configs) {
 
@@ -136,15 +164,42 @@ static void threadLibs(configs) {
 
 //Life cycle libs
 static void lifeCycleLibs(configs) {
+    /*https://developer.android.com/jetpack/androidx/releases/lifecycle#declaring_dependencies*/
 
-    def life_cycle_version = "2.2.0"
+    def lifecycle_version = "2.3.0"
+    def arch_version = "2.1.0"
 
-    configs.implementation "androidx.lifecycle:lifecycle-livedata-ktx:$life_cycle_version"
-    configs.implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$life_cycle_version"
-    configs.implementation "androidx.lifecycle:lifecycle-extensions:$life_cycle_version"
-//    kapt "androidx.lifecycle:lifecycle-compiler:$life_cycle_version"
-    configs.kapt "androidx.lifecycle:lifecycle-common-java8:$life_cycle_version"
+    // To prevent live data update to the UI after onPause
+    configs.implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    configs.implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    //lifecycle extensions have been deprecated
+    /*https://developer.android.com/jetpack/androidx/releases/lifecycle#declaring_dependencies*/
+    /*configs.implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"*/
+
+    // Saved state module for ViewModel
+    configs.implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+
+    // Jetpack Compose Integration for ViewModel
+    configs.implementation "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha01"
+
+    // Annotation processor
+    configs.kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    // alternately - if using Java8, use the following instead of lifecycle-compiler
+    configs.kapt "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     // For Kotlin use kapt instead of annotationProcessor
+
+    // optional - helpers for implementing LifecycleOwner in a Service
+    configs.implementation "androidx.lifecycle:lifecycle-service:$lifecycle_version"
+
+    // optional - ProcessLifecycleOwner provides a lifecycle for the whole application process
+    configs.implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
+
+    // optional - ReactiveStreams support for LiveData
+    configs.implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
+
+    // optional - Test helpers for LiveData
+    configs.testImplementation "androidx.arch.core:core-testing:$arch_version"
 }
 
 //Room db libs
