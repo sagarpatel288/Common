@@ -19,6 +19,9 @@ import com.example.android.common.basestate.BaseState
 import com.example.android.common.baseutils.ConnectionLiveData
 import com.example.android.common.baseutils.ConnectivityProvider
 import com.example.android.common.baseviewmodels.BaseViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.sync.Mutex
 import timber.log.Timber
 
 
@@ -64,6 +67,11 @@ import timber.log.Timber
  */
 abstract class BaseActivity<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutRes private val layoutResId: Int) :
     AppCompatActivity(), Callbacks.StatusCallback, Callbacks.NetworkCallback {
+
+    //region // comment by srdpatel: 4/24/2021 Amazon chime sdk android kotlin github demo
+    private val mutex = Mutex()
+    private val uiScope = CoroutineScope(Dispatchers.Main)
+    //endregion
 
     // The BroadcastReceiver that tracks network connectivity changes.
     private var manager: ConnectivityManager? = null
