@@ -1,6 +1,7 @@
 package com.example.android.common.baseutils
 
 import android.content.Context
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -35,6 +36,25 @@ class ViewUtils {
         fun hideSoftKeyboard(context: Context, view: View) {
             val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+
+        @JvmStatic
+        fun setSingleClickListener(onClickListener: View.OnClickListener, vararg views: View) {
+            if (views.isNotEmpty()) {
+                views.forEach { view ->
+                    view.setOnClickListener(object : View.OnClickListener {
+                        var lastClickTime = 0L
+                        override fun onClick(v: View?) {
+                            // preventing double, using threshold of 3000 ms
+                            if (SystemClock.elapsedRealtime() - lastClickTime < 3000) {
+                                return
+                            }
+                            lastClickTime = SystemClock.elapsedRealtime()
+                            onClickListener.onClick(view)
+                        }
+                    })
+                }
+            }
         }
     }
 }

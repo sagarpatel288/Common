@@ -12,12 +12,20 @@ android {
     buildToolsVersion "30.0.3"
     defaultConfig {
 //        applicationId "com.example.android.common"
-        minSdkVersion 14
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation":"$projectDir/schemas".toString(),
+                        "room.incremental":"true",
+                        "room.expandProjection":"true"]
+            }
+        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -27,7 +35,7 @@ android {
         // https://dev.to/joshuadeguzman/speed-up-your-android-project-s-gradle-builds-1366
         // Disable preDexLibraries if using for clean CI build
         preDexLibraries true
-        javaMaxHeapSize "12g"
+        /*javaMaxHeapSize "12g"*/
     }
 
     buildFeatures {
@@ -47,7 +55,12 @@ android {
                 buildConfigField "String", "API_URL", "\"https://api.openweathermap.org/data/2.5/\""
                 buildConfigField "String", "API_KEY", openweathermap_key
                 debuggable true
-
+                // Avoids compiling unnecessary resources
+                resConfigs "en", "xxhdpi"
+                // If you don't need to run a Crashlytics report, speed up your debug builds by disabling the plugin as follows:
+                ext.enableCrashlytics = false
+                // To prevent Crashlytics from automatically updating its build ID, add the following to your build.gradle file:
+                ext.alwaysUpdateBuildId = false
                 // https://dev.to/joshuadeguzman/speed-up-your-android-project-s-gradle-builds-1366?signin=true
                 /* FirebasePerformance {
                      instrumentationEnabled false
@@ -210,6 +223,7 @@ static void roomDbLibs(configs) {
     // Room
     configs.implementation "androidx.room:room-runtime:$room_version"
     configs.kapt "androidx.room:room-compiler:$room_version"
+    configs.annotationProcessor "androidx.room:room-compiler:$room_version"
     // For Kotlin use kapt instead of annotationProcessor
     // optional - Kotlin Extensions and Coroutines support for Room
     configs.implementation "androidx.room:room-ktx:$room_version"

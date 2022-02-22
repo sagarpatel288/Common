@@ -10,6 +10,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.example.android.common.BR
 import com.example.android.common.baseviewmodels.BaseViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.sync.Mutex
 
 /**
  * 4/10/2020
@@ -29,6 +32,11 @@ abstract class BaseFragment<VDB : ViewDataBinding, BVM : BaseViewModel>(@LayoutR
 
     abstract val viewModel: BVM
     private lateinit var dataBinding: VDB
+
+    //region // comment by srdpatel: 4/24/2021 Amazon chime sdk android kotlin github demo
+    private val mutex = Mutex()
+    private val uiScope = CoroutineScope(Dispatchers.Main)
+    //endregion
 
     override fun onCreateView(
         inflater: LayoutInflater,
