@@ -52,15 +52,17 @@ android {
                 // Disables PNG crunching on DEBUG build type
                 crunchPngs false // Enabled by default for RELEASE build type
                 minifyEnabled false
-                buildConfigField "String", "API_URL", "\"https://api.openweathermap.org/data/2.5/\""
-                buildConfigField "String", "API_KEY", openweathermap_key
+//                buildConfigField "String", "API_URL", "\"https://api.openweathermap.org/data/2.5/\""
+//                buildConfigField "String", "API_KEY", openweathermap_key
                 debuggable true
                 // Avoids compiling unnecessary resources
+/*
                 resConfigs "en", "xxhdpi"
                 // If you don't need to run a Crashlytics report, speed up your debug builds by disabling the plugin as follows:
                 ext.enableCrashlytics = false
                 // To prevent Crashlytics from automatically updating its build ID, add the following to your build.gradle file:
                 ext.alwaysUpdateBuildId = false
+*/
                 // https://dev.to/joshuadeguzman/speed-up-your-android-project-s-gradle-builds-1366?signin=true
                 /* FirebasePerformance {
                      instrumentationEnabled false
@@ -73,8 +75,8 @@ android {
         }
         release {
             minifyEnabled false
-            buildConfigField "String", "API_URL", "\"https://api.openweathermap.org/data/2.5/\""
-            buildConfigField "String", "API_KEY", openweathermap_key
+//            buildConfigField "String", "API_URL", "\"https://api.openweathermap.org/data/2.5/\""
+//            buildConfigField "String", "API_KEY", openweathermap_key
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
